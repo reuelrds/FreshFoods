@@ -14,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountComponent } from './views/account/account.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { NavbarComponent } from './views/shared/navbar/navbar.component';
+
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { NgxMaskModule } from 'ngx-mask';
     SignupComponent,
     LoginComponent,
     AccountComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [],
