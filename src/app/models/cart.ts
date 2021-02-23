@@ -6,4 +6,5 @@ export interface Cart {
   subTotal: number;
   delivery: DeliveryType.Standard;
   totalPrice: number;
+  itemCount: number;
 }
