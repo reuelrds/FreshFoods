@@ -4,6 +4,7 @@ import { Item } from 'src/app/models/item';
 import { ItemService } from 'src/app/services/item.service';
 
 import * as _ from 'lodash';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'freshfood-store',
@@ -15,7 +16,10 @@ export class StoreComponent implements OnInit {
   renderItems: Item[][];
   heroItem: Item;
 
-  constructor(private itemService: ItemService) {}
+  constructor(
+    private itemService: ItemService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.items = this.itemService.getItems();
@@ -25,5 +29,9 @@ export class StoreComponent implements OnInit {
 
   updateHeroItem(item: Item) {
     this.heroItem = item;
+  }
+
+  addItemToCart(item: Item) {
+    this.cartService.addItem(item);
   }
 }

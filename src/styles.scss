@@ -16,7 +16,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$freshfood-primary: mat-palette($mat-green);
+$freshfood-primary: mat-palette($mat-green, 400);
 $freshfood-accent: mat-palette($mat-gray, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -78,4 +78,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-badge-content {
+  color: #fff;
 }

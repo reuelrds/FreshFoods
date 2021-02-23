@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'freshfood-navbar',
@@ -7,7 +8,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   active = 'store';
-  constructor() {}
+  itemCount = 0;
 
-  ngOnInit(): void {}
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.cartItems.subscribe((count) => (this.itemCount = count));
+  }
 }
