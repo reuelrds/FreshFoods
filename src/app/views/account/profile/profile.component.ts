@@ -9,17 +9,17 @@ import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
-  selector: 'freshfood-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss'],
+  selector: 'freshfood-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
 })
-export class AccountComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   hide = true;
   disabled = true;
 
   user: User;
 
-  accountForm: FormGroup;
+  profileForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +29,7 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.accountService.getUser();
 
-    this.accountForm = new FormGroup({
+    this.profileForm = new FormGroup({
       name: new FormControl(this.user.name),
       email: new FormControl(this.user.email),
       password: new FormControl(this.user.password),
@@ -46,8 +46,8 @@ export class AccountComponent implements OnInit {
 
   toggleFormVisibility() {
     const state = this.disabled ? 'disable' : 'enable';
-    Object.keys(this.accountForm.controls).forEach((controlName) => {
-      this.accountForm.controls[controlName][state]();
+    Object.keys(this.profileForm.controls).forEach((controlName) => {
+      this.profileForm.controls[controlName][state]();
     });
   }
 
@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
 
   submitAccountDetails() {
     this.disabled = true;
-    console.log(this.accountForm, this.disabled);
+    console.log(this.profileForm, this.disabled);
     this.toggleFormVisibility();
   }
 }
