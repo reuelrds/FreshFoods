@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Cart } from 'src/app/models/cart';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Cart, CartItem } from 'src/app/models/cart';
 import { Item } from 'src/app/models/item';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -15,14 +15,25 @@ export class CartComponent implements OnInit {
 
   renderItems: Item[][];
 
-  cart1: Item;
-
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.cart = this.cartService.cart;
+    this.cartService.getCart().subscribe((cart) => {
+      this.cart = cart;
+      // this.changeDetector.detectChanges();
+      this.renderItems = _.chunk(this.cart.items, 2);
+      console.log(this.cart);
+    });
+  }
 
-    this.renderItems = _.chunk(this.cart.items, 2);
-    console.log(this.cart);
+  incrementItem(item: CartItem) {
+    this.cartService.addItem(item, 1);
+  }
+
+  decrementItem(item: CartItem) {
+    this.cartService.removeItem(item.id);
   }
 }

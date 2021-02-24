@@ -3,88 +3,81 @@
 </div>
 
 <div class="cart">
-  <div class="container">
+  <div class="container" *ngIf="cart.itemCount != 0; else emptyCart">
     <div class="row">
       <div class="col"></div>
       <div class="col-8">
         <!-- <div class="row row-cols-4"> -->
         <!-- <div class="col"> -->
 
-        <div
-          class="cart__empty"
-          *ngIf="cart.itemCount == 0; else cartSlides"
-        ></div>
+        <!-- <div class="cart__empty" *ngIf="cart.itemCount == 0; else cartSlides"> -->
+        <!-- <img src="/assets/empty_cart.svg" alt="Empty Cart" srcset="" /> -->
+        <!-- </div> -->
 
-        <ng-template #cartSlides>
-          <div
-            class="carousel carousel-dark slide"
-            id="cartCarousel"
-            data-bs-interval="false"
-          >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#cartCarousel"
-                *ngFor="let itemGroup of renderItems; index as i"
-                [attr.data-bs-slide-to]="i"
-                [class.active]="i == 0"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <ng-container
-                *ngFor="let itemGroup of renderItems; first as isFirst"
-              >
-                <div class="carousel-item" [ngClass]="{ active: isFirst }">
-                  <div class="cart__item-container">
-                    <div
-                      class="cart__item shadow-lg"
-                      *ngFor="let item of itemGroup"
-                    >
-                      <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
-                      <h2>{{ item.name }}</h2>
-                      <p>${{ item.price * item.itemCount }}</p>
-                      <div class="increment-stepper">
-                        <button mat-icon-button>
-                          <mat-icon>remove</mat-icon>
-                        </button>
-                        <div class="text-center pr-5 pl-5">
-                          {{ item.itemCount }} {{ item.unit }}
-                        </div>
-                        <button mat-icon-button>
-                          <mat-icon>add</mat-icon>
-                        </button>
+        <!-- <ng-template #cartSlides> -->
+        <div
+          class="carousel carousel-dark slide"
+          id="cartCarousel"
+          data-bs-interval="false"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#cartCarousel"
+              *ngFor="let itemGroup of renderItems; index as i"
+              [attr.data-bs-slide-to]="i"
+              [class.active]="i == 0"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <ng-container
+              *ngFor="let itemGroup of renderItems; first as isFirst"
+            >
+              <div class="carousel-item" [ngClass]="{ active: isFirst }">
+                <div class="cart__item-container">
+                  <div
+                    class="cart__item shadow-lg"
+                    *ngFor="let item of itemGroup"
+                  >
+                    <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
+                    <h2>{{ item.name }}</h2>
+                    <p>${{ item.price * item.itemCount }}</p>
+                    <div class="increment-stepper">
+                      <button mat-icon-button (click)="decrementItem(item)">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                      <div class="text-center pr-5 pl-5">
+                        {{ item.itemCount }} {{ item.unit }}
                       </div>
+                      <button mat-icon-button (click)="incrementItem(item)">
+                        <mat-icon>add</mat-icon>
+                      </button>
                     </div>
                   </div>
                 </div>
-              </ng-container>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#cartCarousel"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#cartCarousel"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+              </div>
+            </ng-container>
           </div>
-        </ng-template>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#cartCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#cartCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <!-- </ng-template> -->
       </div>
       <div class="col"></div>
     </div>
@@ -108,4 +101,19 @@
       <div class="col"></div>
     </div>
   </div>
+
+  <ng-template #emptyCart>
+    <div class="container pt-5">
+      <div class="row pt-5">
+        <div class="col"></div>
+        <div
+          class="col-8 text-center d-flex flex-column align-items-center justify-content-center"
+        >
+          <img src="/assets/empty_cart.svg" alt="" />
+          <h2 class="mt-5 emptyCart">Empty Cart</h2>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+  </ng-template>
 </div>
