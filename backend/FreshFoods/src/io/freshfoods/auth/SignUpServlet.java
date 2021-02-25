@@ -32,7 +32,7 @@ import io.freshfoods.utils.Utils;
 /**
  * Servlet implementation class SignUpServlet
  */
-@WebServlet("/SignUpServlet")
+@WebServlet(name="SignUpServlet", urlPatterns="/auth/signup")
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -58,6 +58,8 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
 		
 		JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
 		String userId = UUID.randomUUID().toString();
@@ -96,8 +98,7 @@ public class SignUpServlet extends HttpServlet {
 			
 			String jwtToken = Utils.getJWTToken();
 
-			response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
+			
 		    response.setHeader("Authorization", "Bearer " + jwtToken);
 		    
 		    responseData.addProperty("message", "Signup Successfull");
@@ -108,9 +109,9 @@ public class SignUpServlet extends HttpServlet {
 		    response.setStatus(HttpServletResponse.SC_CREATED);
 		    
 		    
+
 			
-			
-		} catch (NamingException e) {
+		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			responseData.addProperty("message", "Error");
@@ -118,24 +119,12 @@ public class SignUpServlet extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			responseData.addProperty("message", "Error");
-			responseData.addProperty("errorDetails", e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} finally {
 			try {
 				stmt.close();
 				conn.close();
 				initContext.close();
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				responseData.addProperty("message", "Error");
-				responseData.addProperty("errorDetails", e.getMessage());
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			} catch (SQLException e) {
+			} catch (SQLException | NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				responseData.addProperty("message", "Error");

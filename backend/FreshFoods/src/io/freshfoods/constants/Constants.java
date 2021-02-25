@@ -7,4 +7,5 @@ public class Constants {
 	public static final long EXPIRATION_TIME = 360000; // 1 hour
 
 	public static final String INSERT_USER = "INSERT INTO User (id, name, email, password) values (?, ?, ?, ?)";
+	public static final String GET_USER = "SELECT * FROM User WHERE email = ?";
 }
