@@ -6,7 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { AccountService } from 'src/app/services/account.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { AuthService } from 'src/app/services/auth.service';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'freshfood-profile',
@@ -23,25 +26,27 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private accountService: AccountService
+    private authService: AuthService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
-    this.user = this.accountService.getUser();
+    this.profileService.$user.subscribe((user) => {
+      this.user = user;
 
-    this.profileForm = new FormGroup({
-      name: new FormControl(this.user.name),
-      email: new FormControl(this.user.email),
-      password: new FormControl(this.user.password),
-      phone: new FormControl(this.user.phone),
-      addressline1: new FormControl(this.user.addressLine1),
-      addressline2: new FormControl(this.user.addressLine2),
-      city: new FormControl(this.user.city),
-      state: new FormControl(this.user.state),
-      zipcode: new FormControl(this.user.zipcode),
+      this.profileForm = new FormGroup({
+        name: new FormControl(this.user.name),
+        email: new FormControl(this.user.email),
+        phone: new FormControl(this.user.phone),
+        addressline1: new FormControl(this.user.addressLine1),
+        addressline2: new FormControl(this.user.addressLine2),
+        city: new FormControl(this.user.city),
+        state: new FormControl(this.user.state),
+        zipcode: new FormControl(this.user.zipcode),
+      });
+
+      this.toggleFormVisibility();
     });
-
-    this.toggleFormVisibility();
   }
 
   toggleFormVisibility() {
@@ -61,5 +66,22 @@ export class ProfileComponent implements OnInit {
     this.disabled = true;
     console.log(this.profileForm, this.disabled);
     this.toggleFormVisibility();
+
+    const newUser = {
+      id: this.user.id,
+      ...this.profileForm.value,
+    };
+
+    console.log(newUser);
+
+    const user = _.mapValues(newUser, (value) => {
+      if (value == null) {
+        return '';
+      } else {
+        return value;
+      }
+    }) as User;
+
+    this.profileService.updateUser(user);
   }
 }
