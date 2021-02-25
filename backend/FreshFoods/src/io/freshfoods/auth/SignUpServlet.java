@@ -101,8 +101,17 @@ public class SignUpServlet extends HttpServlet {
 			
 		    response.setHeader("Authorization", "Bearer " + jwtToken);
 		    
+		    // Container for User Details
+			JsonObject userData = new JsonObject();
+			
+			// Populate the container
+			userData.addProperty("id", userId);
+			userData.addProperty("name", data.get("name").getAsString());
+			userData.addProperty("email", data.get("email").getAsString());
+			
+			
 		    responseData.addProperty("message", "Signup Successfull");
-		    responseData.addProperty("userId", userId);
+		    responseData.addProperty("user", userData);
 		    responseData.addProperty("jwtToken", jwtToken);
 		    responseData.addProperty("expiresin", Constants.EXPIRATION_TIME);
 		    
