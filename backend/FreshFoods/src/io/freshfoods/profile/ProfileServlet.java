@@ -27,7 +27,7 @@ import io.freshfoods.utils.Utils;
 /**
  * Servlet implementation class ProfileServlet
  */
-@WebServlet("/profile")
+@WebServlet("/api/profile")
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

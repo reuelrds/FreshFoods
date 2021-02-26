@@ -22,8 +22,10 @@ import { MatRippleModule } from '@angular/material/core';
 import { CartComponent } from './views/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RecipeComponent } from './views/recipe/recipe.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -50,9 +52,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatBadgeModule,
     MatRippleModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

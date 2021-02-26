@@ -25,7 +25,7 @@ import io.freshfoods.constants.Constants;
 /**
  * Servlet implementation class RecipeServlet
  */
-@WebServlet("/recipes")
+@WebServlet("/api/recipes")
 public class RecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		
 		// Parse POST Data
 		JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
-		System.out.println(data);
+//		System.out.println(data);
 		
 		// Retrieve Email and Password
 		String email = data.get("email").getAsString();
