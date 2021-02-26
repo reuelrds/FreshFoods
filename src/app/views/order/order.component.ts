@@ -66,6 +66,14 @@ export class OrderComponent implements OnInit {
       deliveryType: '',
       deliveryDate: '',
     });
+
+    this.paymentForm = this.formBuilder.group({
+      cardNumber: '',
+      firstName: '',
+      lastName: '',
+      expiry: '',
+      cvc: '',
+    });
   }
 
   ngAfterViewInit() {
