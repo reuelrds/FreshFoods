@@ -41,7 +41,12 @@
                   >
                     <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
                     <h2>{{ item.name }}</h2>
-                    <p>${{ item.price * item.itemCount }}</p>
+                    <p>
+                      {{
+                        item.price * item.itemCount
+                          | currency: "USD":"symbol":".2-2"
+                      }}
+                    </p>
                     <div class="increment-stepper">
                       <button mat-icon-button (click)="decrementItem(item)">
                         <mat-icon>remove</mat-icon>
@@ -86,15 +91,21 @@
       <div class="col-3 cart__amount shadow-lg">
         <div class="cart__subtotal mb-1">
           <div>Sub-Total</div>
-          <div class="">${{ cart.subTotal }}</div>
+          <div class="">
+            {{ cart.subTotal | currency: "USD":"symbol":".2-2" }}
+          </div>
         </div>
         <div class="cart__delivery mb-1">
           <div>(Standard) Delivery Fees</div>
-          <div class="">${{ cart.delivery }}</div>
+          <div class="">
+            {{ cart.delivery | currency: "USD":"symbol":".2-2" }}
+          </div>
         </div>
         <div class="cart__total mt-2 mb-4">
           <div>Total</div>
-          <div class="">${{ cart.totalPrice }}</div>
+          <div class="">
+            {{ cart.totalPrice | currency: "USD":"symbol":".2-2" }}
+          </div>
         </div>
         <button mat-raised-button color="primary">Checkout</button>
       </div>
