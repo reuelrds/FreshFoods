@@ -1,0 +1,64 @@
+<form [formGroup]="optionsForm">
+  <div class="row">
+    <div class="col">
+      <h3 class="mb-2 ms-2 mt-5">Select Speed</h3>
+
+      <div class="row">
+        <div
+          class="col options__delivery"
+          (click)="onCheck('Standard')"
+          matRipple
+        >
+          <img src="/assets/icon-delivery.svg" alt="" />
+          <h3>Standard</h3>
+          <p>2-3 Days (Free)</p>
+          <div class="round">
+            <input
+              type="checkbox"
+              id="standardCheckbox"
+              value="1.99"
+              #standardCheckboxRef
+            />
+            <label for="standardCheckbox"></label>
+          </div>
+        </div>
+        <div
+          class="col options__delivery"
+          (click)="onCheck('Express')"
+          matRipple
+        >
+          <img src="/assets/icon-fast-delivery.svg" alt="" />
+          <h3>Express</h3>
+          <p>Next Day ($4.99)</p>
+          <div class="round">
+            <input
+              type="checkbox"
+              id="expressCheckbox"
+              value="4.99"
+              #expressCheckboxRef
+            />
+            <label for="expressCheckbox"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3 class="mb-2 ms-2 mb-3 mt-5">Select Date</h3>
+      <mat-form-field appearance="fill" class="ms-2">
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [min]="startDate"
+          [max]="endDate"
+          formControlName="deliveryDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

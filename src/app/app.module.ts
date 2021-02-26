@@ -18,7 +18,7 @@ import { NavbarComponent } from './views/shared/navbar/navbar.component';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StoreComponent } from './views/store/store.component';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { CartComponent } from './views/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RecipeComponent } from './views/recipe/recipe.component';
@@ -26,6 +26,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthInterceptor } from './core/auth.interceptor';
+import { OrderComponent } from './views/order/order.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { AddressComponent } from './views/order/address/address.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { OptionsComponent } from './views/order/options/options.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -37,6 +44,9 @@ import { AuthInterceptor } from './core/auth.interceptor';
     StoreComponent,
     CartComponent,
     RecipeComponent,
+    OrderComponent,
+    AddressComponent,
+    OptionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,11 +62,19 @@ import { AuthInterceptor } from './core/auth.interceptor';
     MatBadgeModule,
     MatRippleModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
     MatMenuModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false },
+    },
   ],
   bootstrap: [AppComponent],
 })

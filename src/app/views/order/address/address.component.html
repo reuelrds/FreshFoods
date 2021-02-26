@@ -1,0 +1,66 @@
+<form [formGroup]="addressForm">
+  <!-- <ng-template matStepLabel>Delivery Details</ng-template> -->
+  <div class="row">
+    <div class="col">
+      <h3 class="account__header text-start mb-3">Phone Number</h3>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phone" mask="(000) 000-0000" />
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h3 class="account__header text-start mb-3">Address</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Street Address</mat-label>
+            <input matInput formControlName="addressLine1" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 mr-2">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Apt, Suite, ect (Optional)</mat-label>
+            <input matInput formControlName="addressLine2" />
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 mr-2">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="state" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>ZIP code</mat-label>
+            <input matInput formControlName="zipcode" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <button mat-raised-button class="w-100 mt-4" color="primary" matStepperNext> -->
+  <!-- Next -->
+  <!-- </button> -->
+</form>

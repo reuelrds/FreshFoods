@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <freshfood-navbar></freshfood-navbar>
+</div>
+
+<div class="order">
+  <div class="container-fluid h-100 d-flex justify-content-center">
+    <div class="row">
+      <div class="col"></div>
+      <div class="order__container col-10 shadow-lg">
+        <mat-vertical-stepper #stepper>
+          <mat-step [stepControl]="addressForm">
+            <ng-template matStepLabel state="location"
+              >Delivery Details</ng-template
+            >
+            <freshfood-address [addressForm]="addressForm"></freshfood-address>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              class="order__stepper-button"
+            >
+              Next
+            </button>
+          </mat-step>
+          <mat-step [stepControl]="optionsForm">
+            <ng-template matStepLabel>Delivery Options</ng-template>
+            <freshfood-options [optionsForm]="optionsForm"></freshfood-options>
+            <div class="m-2">
+              <button
+                mat-raised-button
+                matStepperPrevious
+                color="primary"
+                class="order__stepper-button"
+              >
+                Back
+              </button>
+              <button
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                class="order__stepper-button"
+              >
+                Next
+              </button>
+            </div>
+          </mat-step>
+
+          <mat-step [stepControl]="addressForm">
+            <ng-template matStepLabel>Payment</ng-template>
+            <freshfood-options [optionsForm]="optionsForm"></freshfood-options>
+            <div class="m-2">
+              <button
+                mat-raised-button
+                matStepperPrevious
+                color="primary"
+                class="order__stepper-button"
+              >
+                Back
+              </button>
+              <button
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                class="order__stepper-button"
+              >
+                Next
+              </button>
+            </div>
+          </mat-step>
+
+          <ng-template matStepperIcon="location">
+            <mat-icon>edit_location</mat-icon>
+          </ng-template>
+        </mat-vertical-stepper>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
