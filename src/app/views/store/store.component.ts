@@ -16,6 +16,7 @@ export class StoreComponent implements OnInit {
   items: Item[];
   renderItems: Item[][];
   heroItem: Item;
+  isLoading: boolean;
 
   constructor(
     private itemService: ItemService,
@@ -23,9 +24,16 @@ export class StoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.items = this.itemService.getItems();
-    this.heroItem = this.items[0];
-    this.renderItems = _.chunk(this.items, 3);
+    this.isLoading = true;
+    this.itemService.getItems().subscribe((items) => {
+      this.items = items;
+      this.heroItem = this.items[0];
+      this.renderItems = _.chunk(this.items, 3);
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000);
+    });
   }
 
   updateHeroItem(item: Item) {

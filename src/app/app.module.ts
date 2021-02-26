@@ -23,6 +23,7 @@ import { CartComponent } from './views/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RecipeComponent } from './views/recipe/recipe.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTooltipModule,
     MatBadgeModule,
     MatRippleModule,
-
+    MatProgressSpinnerModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [],
