@@ -96,7 +96,8 @@ public class SignUpServlet extends HttpServlet {
 			
 			System.out.println(result);
 			
-			String jwtToken = Utils.getJWTToken();
+			// Get JWT Token
+			String jwtToken = Utils.getJWTToken(userId);
 
 			
 		    response.setHeader("Authorization", "Bearer " + jwtToken);
