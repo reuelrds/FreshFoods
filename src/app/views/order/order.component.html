@@ -39,13 +39,14 @@
                 matStepperNext
                 color="primary"
                 class="order__stepper-button"
+                (click)="onOptionsSubmit()"
               >
                 Next
               </button>
             </div>
           </mat-step>
 
-          <mat-step [stepControl]="paymentForm">
+          <!-- <mat-step [stepControl]="paymentForm">
             <ng-template matStepLabel>Payment</ng-template>
             <freshfood-payment [paymentForm]="paymentForm"></freshfood-payment>
             <div class="mt-3">
@@ -62,19 +63,23 @@
                 matStepperNext
                 color="primary"
                 class="order__stepper-button"
+                (click)="onPaymentSubmit()"
               >
                 Next
               </button>
             </div>
-          </mat-step>
+          </mat-step> -->
           <mat-step>
             <ng-template matStepLabel>Summary</ng-template>
             <freshfood-details
               [cart]="cart"
+              [raveOptions]="raveOptions"
+              (onSuccessPayment)="onPaymentSuccess($event)"
               class="mt-5 mb-5"
             ></freshfood-details>
             <div class="mt-3">
               <button
+                matStepperPrevious
                 mat-raised-button
                 matStepperPrevious
                 color="primary"

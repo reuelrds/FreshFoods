@@ -19,13 +19,13 @@ export class OptionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.endDate.setDate(this.startDate.getDate() + 21);
-    console.log(this.startDate);
-    console.log(this.endDate);
+    // console.log(this.startDate);
+    // console.log(this.endDate);
   }
 
   onCheck(deliveryType) {
-    console.log(deliveryType);
-    console.log(this.standardCheckbox);
+    // console.log(deliveryType);
+    // console.log(this.standardCheckbox);
     if (deliveryType === 'Standard') {
       this.standardCheckbox.nativeElement.checked = true;
       this.expressCheckbox.nativeElement.checked = false;
@@ -35,6 +35,6 @@ export class OptionsComponent implements OnInit {
       this.expressCheckbox.nativeElement.checked = true;
       this.optionsForm.patchValue({ deliveryType: 4.99 });
     }
-    console.log(this.optionsForm.value);
+    // console.log(this.optionsForm.value);
   }
 }

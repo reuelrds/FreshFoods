@@ -15,4 +15,10 @@ public class Constants {
 	
 	public static final String GET_RECIPES = "SELECT Recipe.*, COUNT(recipeingredient.ingredientId) as ingredientCount FROM RECIPE INNER JOIN RecipeIngredient ON Recipe.id = recipeingredient.recipeId GROUP BY Recipe.id";
 	public static final String GET_RECIPE_INGREDIENTS = "SELECT Item.*,  RecipeIngredient.ingredientItemCount FROM Item INNER JOIN RecipeIngredient ON RecipeIngredient.ingredientId = Item.id WHERE RecipeIngredient.recipeId = ?";
+	
+	
+	public static final String INSERT_DELIVERY_ADDRESS = "INSERT INTO Address values(?, ?, ?, ?, ?, ?)";
+	public static final String INSERT_ORDER = "INSERT INTO Orders values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String INSERT_ORDER_ITEMS = "INSERT INTO OrderItems values(?, ?, ?)";
+	
 }
