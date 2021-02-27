@@ -7,6 +7,8 @@ import { RaveOptions, RavePaymentData } from 'angular-rave';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 
+import * as shortid from 'shortid';
+
 @Component({
   selector: 'freshfood-order',
   templateUrl: './order.component.html',
@@ -125,6 +127,7 @@ export class OrderComponent implements OnInit {
 
     let orderDetails = this.orderForm.value;
     orderDetails = {
+      id: shortid.generate(),
       orderDate: new Date().toISOString(),
       cart: {
         ...this.cart,

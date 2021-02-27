@@ -21,4 +21,7 @@ public class Constants {
 	public static final String INSERT_ORDER = "INSERT INTO Orders values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String INSERT_ORDER_ITEMS = "INSERT INTO OrderItems values(?, ?, ?)";
 	
+	public static final String GET_ORDERS = "SELECT * FROM Orders INNER JOIN Address ON Orders.deliveryAddressId = Address.id";
+	public static final String GET_ORDER_ITEMS = "SELECT Item.*,  OrderItems.itemCount FROM Item INNER JOIN OrderItems ON OrderItems.itemId = Item.id WHERE OrderItems.orderId = ?";
+	
 }

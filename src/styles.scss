@@ -70,10 +70,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-  height: 0.4rem;
-  width: 0.4rem;
+  height: 0.5rem;
+  width: 0.5rem;
 
   &-thumb {
+    border-radius: 10px;
     background: rgba(0, 0, 0, 0.26);
   }
 }
