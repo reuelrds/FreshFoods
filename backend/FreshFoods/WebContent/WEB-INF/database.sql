@@ -1,4 +1,6 @@
 SET @STATIC_FILES_URL = "http://localhost:4200";
+CREATE DATABASE FreshFoods;
+USE FreshFoods;
 CREATE TABLE User(
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(20),
@@ -80,7 +82,7 @@ INSERT INTO Item
 VALUES (
         "item1",
         "Apple",
-        CONCAT(@STATIC_FILES_URL, "/assets/apple.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/apple.png"),
         0.5,
         "count",
         "Broccoli is a lovely green cruciferous vegetable. It’s healthy, delicious and nutritious, and there’s honestly nothing more you need to know.",
@@ -91,7 +93,7 @@ VALUES (
     (
         "item2",
         "Banana",
-        CONCAT(@STATIC_FILES_URL, "/assets/banana.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/banana.png"),
         0.25,
         "count",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -102,7 +104,7 @@ VALUES (
     (
         "item3",
         "Strawberry",
-        CONCAT(@STATIC_FILES_URL, "/assets/strawberry.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/strawberry.png"),
         0.56,
         "count",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -113,7 +115,7 @@ VALUES (
     (
         "item4",
         "Broccoli",
-        CONCAT(@STATIC_FILES_URL, "/assets/broccoli.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/broccoli.png"),
         0.2,
         "head",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -124,7 +126,7 @@ VALUES (
     (
         "item5",
         "Kale",
-        CONCAT(@STATIC_FILES_URL, "/assets/kale.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/kale.png"),
         0.2,
         "grams",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -135,7 +137,7 @@ VALUES (
     (
         "item6",
         "Lemon",
-        CONCAT(@STATIC_FILES_URL, "/assets/lemon.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/lemon.png"),
         0.8,
         "count",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -146,7 +148,7 @@ VALUES (
     (
         "item7",
         "Red Pepper",
-        CONCAT(@STATIC_FILES_URL, "/assets/red-pepper.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/red-pepper.png"),
         0.23,
         "count",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -157,7 +159,7 @@ VALUES (
     (
         "item8",
         "Orange",
-        CONCAT(@STATIC_FILES_URL, "/assets/orange.svg"),
+        CONCAT(@STATIC_FILES_URL, "/assets/orange.png"),
         0.9,
         "count",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt sed alias dolor iure accusamus ab consequatur, ad, illum sapiente.",
@@ -245,14 +247,14 @@ VALUES ("recipe1", "item1", 1),
 -- FROM Item
 --     INNER JOIN RecipeIngredient ON RecipeIngredient.ingredientId = Item.id
 -- WHERE RecipeIngredient.recipeId = "recipe1";
-Select *
-from Orders;
-SELECT *
-from Address;
-SELECT *
-FROM Orders
-    INNER JOIN Address ON Orders.deliveryAddressId = Address.id;
-select *
-from user,
-    address
-where user.id = address.userId;
+-- Select *
+-- from Orders;
+-- SELECT *
+-- from Address;
+-- SELECT *
+-- FROM Orders
+--     INNER JOIN Address ON Orders.deliveryAddressId = Address.id;
+-- select *
+-- from user,
+--     address
+-- where user.id = address.userId;

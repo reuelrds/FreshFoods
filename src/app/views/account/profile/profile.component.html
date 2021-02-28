@@ -1,9 +1,13 @@
 <div class="account container-fluid">
-  <freshfood-navbar></freshfood-navbar>
-  <div class="account__container row d-flex justify-content-center">
-    <div class="col-4 text-center">
+  <freshfood-navbar [active]="'settings'"></freshfood-navbar>
+  <div
+    class="account__container row d-flex justify-content-center align-items-center"
+  >
+    <div class="col-8 text-center">
       <form [formGroup]="profileForm">
-        <div class="shadow d-flex flex-column justify-content-around h-100 p-5">
+        <div
+          class="shadow d-flex flex-column justify-content-around h-100 p-5 profile-box"
+        >
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
@@ -20,71 +24,46 @@
               </button>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field appearance="fill" class="w-100">
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="name" />
-                <mat-icon matPrefix>person</mat-icon>
-              </mat-form-field>
 
-              <div class="row">
-                <div class="col">
-                  <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" />
-                    <mat-icon matPrefix>email</mat-icon>
-                  </mat-form-field>
+          <div class="row">
+            <div class="col d-flex justify-content-around">
+              <div class="div">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="account__header text-start mb-3">Name</h3>
+                    <mat-form-field appearance="fill" class="w-100">
+                      <mat-label>Name</mat-label>
+                      <input matInput formControlName="name" />
+                      <mat-icon matPrefix>person</mat-icon>
+                    </mat-form-field>
+
+                    <div class="row">
+                      <div class="col">
+                        <h3 class="account__header text-start mb-3">Email</h3>
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>Email</mat-label>
+                          <input matInput formControlName="email" />
+                          <mat-icon matPrefix>email</mat-icon>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <!-- <div class="col-6">
-                  <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>Password</mat-label>
-                    <input
-                      matInput
-                      [type]="hide ? 'password' : 'text'"
-                      formControlName="password"
-                    />
-                    <mat-icon matPrefix>https</mat-icon>
-                    <button
-                      mat-icon-button
-                      matSuffix
-                      (click)="hide = !hide"
-                      type="button"
-                    >
-                      <mat-icon>{{
-                        hide ? "visibility_off" : "visibility"
-                      }}</mat-icon>
-                    </button>
-                  </mat-form-field>
-                </div> -->
-              </div>
-              <!-- </form> -->
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <!-- <button
-              mat-raised-button
-              class="account__submit-button w-100 rounded-pill pt-1 pb-1"
-            >
-              Create Account
-            </button>
-
-            <button mat-button class="account__create-button mt-3">
-              Sign In
-            </button> -->
-              <div class="row">
-                <div class="col">
-                  <h3 class="account__header text-start mb-3">Phone Number</h3>
-                  <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>Phone Number</mat-label>
-                    <input
-                      matInput
-                      formControlName="phone"
-                      mask="(000) 000-0000"
-                    />
-                    <mat-icon matPrefix>phone</mat-icon>
-                  </mat-form-field>
+                <div class="row">
+                  <div class="col">
+                    <h3 class="account__header text-start mb-3">
+                      Phone Number
+                    </h3>
+                    <mat-form-field appearance="fill" class="w-100">
+                      <mat-label>Phone Number</mat-label>
+                      <input
+                        matInput
+                        formControlName="phone"
+                        mask="(000) 000-0000"
+                      />
+                      <mat-icon matPrefix>phone</mat-icon>
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
               <div class="row mt-3">
@@ -100,7 +79,6 @@
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Street Address</mat-label>
                         <input matInput formControlName="addressLine1" />
-                        <!-- <mat-icon matPrefix>phone</mat-icon> -->
                       </mat-form-field>
                     </div>
                   </div>
@@ -110,14 +88,12 @@
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Apt, Suite, ect (Optional)</mat-label>
                         <input matInput formControlName="addressLine2" />
-                        <!-- <mat-icon matPrefix>phone</mat-icon> -->
                       </mat-form-field>
                     </div>
                     <div class="col-6">
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>City</mat-label>
                         <input matInput formControlName="city" />
-                        <!-- <mat-icon matPrefix>phone</mat-icon> -->
                       </mat-form-field>
                     </div>
                   </div>
@@ -127,7 +103,6 @@
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>State</mat-label>
                         <input matInput formControlName="state" />
-                        <!-- <mat-icon matPrefix>phone</mat-icon> -->
                       </mat-form-field>
                     </div>
 
@@ -135,7 +110,6 @@
                       <mat-form-field appearance="fill" class="w-100">
                         <mat-label>ZIP code</mat-label>
                         <input matInput formControlName="zipcode" />
-                        <!-- <mat-icon matPrefix>phone</mat-icon> -->
                       </mat-form-field>
                     </div>
                   </div>
