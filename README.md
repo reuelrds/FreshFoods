@@ -6,7 +6,34 @@ The FrontEnd is built using with [Angular](https://angular.io), while the Backen
 All the payments are processed by **[Rave by Flutterwave](https://ravepay.co/).**
 
 
+Table of Contents:
+- [Freshfoods](#freshfoods)
+  - [Hosting](#hosting)
+  - [Website Pages](#website-pages)
+  - [Clone this Repo](#clone-this-repo)
+  - [Project Setup](#project-setup)
+  - [Run the Project](#run-the-project)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 **_The website is Live and can be previewed [here](http://3.139.60.126/FreshFoods)._**
+
+Test User:
+```
+Name: Arimus Black  
+Email: arimus@testemail.com  
+Password: 1234  
+```
+
+Test Payment Cart:
+```
+Card number: 5531 8866 5214 2950
+cvv: 564
+Expiry: 09/32
+Pin: 3310
+OTP: 12345
+```
+
 
 
 ## Hosting
