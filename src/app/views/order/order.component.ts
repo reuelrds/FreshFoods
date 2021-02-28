@@ -122,7 +122,7 @@ export class OrderComponent implements OnInit {
         phonenumber: this.user.phone,
       },
       amount: this.cart.totalPrice,
-      tx_ref: `${Math.random() * 1000000}`,
+      tx_ref: `${shortid.generate()}`,
       customizations: {
         title: 'Fresh Foods',
         description: 'Lorem Ipsum',
@@ -132,10 +132,6 @@ export class OrderComponent implements OnInit {
   }
 
   onPaymentSuccess($event: RavePaymentData | String) {
-    // this.paymentForm.patchValue({
-    //   transactionId: $event.transaction_id,
-    // });
-
     this.isLoading = true;
     this.orderId = shortid.generate();
 

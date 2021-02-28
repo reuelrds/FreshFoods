@@ -27,8 +27,7 @@ export class DetailsComponent implements OnInit {
 
   paymentSuccessfull($event) {
     // console.log($event);
-    // this.onSuccessPayment.emit($event);
-    this.onSuccessPayment.emit('wefwe');
+    this.onSuccessPayment.emit($event);
   }
 
   paymentClose() {

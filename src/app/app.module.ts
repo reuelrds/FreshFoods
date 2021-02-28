@@ -40,6 +40,7 @@ import { AngularRaveModule } from 'angular-rave';
 import { environment } from 'src/environments/environment';
 import { OrderDetailsComponent } from './views/account/order-details/order-details.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatDatepickerModule,
     MatNativeDateModule,
     ScrollingModule,
+    MatSnackBarModule,
     NgxMaskModule.forRoot(),
     AngularRaveModule.forRoot(environment.RAVE_API_KEY),
   ],
