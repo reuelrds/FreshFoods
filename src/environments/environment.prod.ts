@@ -1,4 +1,7 @@
+import { env } from './env';
+
 export const environment = {
   production: true,
-  BACKEND_URL: 'http://localhost:8080/FreshFoods',
+  BACKEND_URL: env.BACKEND_URL,
+  RAVE_API_KEY: env.RAVE_API_KEY,
 };
