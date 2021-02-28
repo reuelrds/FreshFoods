@@ -130,7 +130,8 @@ export class OrderComponent implements OnInit {
       customizations: {
         title: 'Fresh Foods',
         description: 'Lorem Ipsum',
-        logo: 'http://3.139.60.126/FreshFoods/assets/logo-small.svg',
+        logo:
+          'https://raw.githubusercontent.com/reuelrds/FreshFoods/main/src/assets/logo-small.svg',
       },
     };
   }
