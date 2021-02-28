@@ -9,16 +9,11 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderDetailsComponent implements OnInit {
   orders: Order[];
-  order: Order;
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
     this.orderService.getOrders().subscribe((orders) => {
       this.orders = orders;
-      this.order = orders[2];
-
-      const items = this.order.orderItems;
-
       console.log(orders);
     });
   }

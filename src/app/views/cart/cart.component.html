@@ -107,7 +107,9 @@
             {{ cart.totalPrice | currency: "USD":"symbol":".2-2" }}
           </div>
         </div>
-        <button mat-raised-button color="primary">Checkout</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Checkout
+        </button>
       </div>
       <div class="col"></div>
     </div>

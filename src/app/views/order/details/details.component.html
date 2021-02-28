@@ -59,10 +59,12 @@
       </button> -->
       <button
         mat-raised-button
+        class="p-1"
         color="primary"
         (click)="paymentSuccessfull('ff')"
       >
         Place Order
+        <span class="circ-spinner ms-3" *ngIf="!isLoading"></span>
       </button>
     </div>
   </div>
