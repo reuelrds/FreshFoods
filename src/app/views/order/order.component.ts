@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Cart } from 'src/app/models/cart';
@@ -76,7 +76,8 @@ export class OrderComponent implements OnInit {
     private orderService: OrderService,
     private profileService: ProfileService,
     private router: Router,
-    private snackBarService: SnackbarService
+    private snackBarService: SnackbarService,
+    private zone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -163,7 +164,6 @@ export class OrderComponent implements OnInit {
       ...orderDetails,
     };
 
-    // console.log(this.orderForm.value);
     this.orderService.placeOrder(orderDetails).subscribe((message) => {
       console.log('fasle spinner');
       this.isLoading = false;
@@ -173,9 +173,15 @@ export class OrderComponent implements OnInit {
 
       this.isOrderSuccessfull = true;
 
-      this.router.navigate(['/store']);
+      this.zone.run(() => {
+        // this.router.navigate(['/login']);
+        this.router.navigate(['/store']).then(() => {
+          this.snackBarService.displaySnackBar(
+            'Order Placed Successfully',
+            'Ok'
+          );
+        });
+      });
     });
-    // setTimeout(() => {
-    // }, 2000);
   }
 }
