@@ -54,8 +54,10 @@
         [raveOptions]="raveOptions"
         (callback)="paymentSuccessfull($event)"
         (onclose)="paymentClose()"
+        (init)="onPaymentInit()"
       >
         Place Order
+        <span class="circ-spinner ms-3" *ngIf="isLoading"></span>
       </button>
       <!-- <button
         mat-raised-button

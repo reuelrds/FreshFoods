@@ -12,7 +12,7 @@ import { RecipeComponent } from './views/recipe/recipe.component';
 import { StoreComponent } from './views/store/store.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'store', component: StoreComponent, canActivate: [AuthGuard] },
   { path: 'recipes', component: RecipeComponent, canActivate: [AuthGuard] },
@@ -24,6 +24,7 @@ const routes: Routes = [
     component: OrderDetailsComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'login', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

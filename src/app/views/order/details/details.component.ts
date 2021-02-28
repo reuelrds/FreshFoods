@@ -15,9 +15,12 @@ export class DetailsComponent implements OnInit {
   @Input() raveOptions: RaveOptions;
   @Input() isLoading: boolean;
 
-  @Output() onSuccessPayment = new EventEmitter<RavePaymentData | String>();
+  @Output() onSuccessPayment = new EventEmitter<RavePaymentData>();
+  @Output() onPayinit = new EventEmitter<void>();
 
   constructor(private cartService: CartService) {}
+
+  event: RavePaymentData;
 
   ngOnInit(): void {}
 
@@ -25,13 +28,22 @@ export class DetailsComponent implements OnInit {
     console.log(this.raveOptions);
   }
 
+  onPaymentInit() {
+    this.onPayinit.emit();
+  }
+
   paymentSuccessfull($event) {
     // console.log($event);
-    this.onSuccessPayment.emit($event);
+    // this.onSuccessPayment.emit($event);
+    this.event = $event;
   }
 
   paymentClose() {
     // Remove the Rave Pay IFrame
     $(document).find('iframe')[0].remove();
+
+    setTimeout(() => {
+      this.onSuccessPayment.emit(this.event);
+    }, 3000);
   }
 }

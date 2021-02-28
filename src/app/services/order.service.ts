@@ -23,16 +23,10 @@ export class OrderService {
   placeOrder(order): Observable<{ message: String }> {
     console.log(order);
 
-    return this.httpClient
-      .post<{ message: String }>(`${this.BACKEND_URL}/api/order`, order)
-      .pipe(
-        tap((message) => {
-          this.snackBarService.displaySnackBar(
-            'Order Placedt Successfully',
-            'Done'
-          );
-        })
-      );
+    return this.httpClient.post<{ message: String }>(
+      `${this.BACKEND_URL}/api/order`,
+      order
+    );
   }
 
   getOrders() {
