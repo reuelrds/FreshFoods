@@ -136,21 +136,21 @@ export class OrderComponent implements OnInit {
   }
 
   onPaymentInit() {
-    console.log('paymentInit');
+    // console.log('paymentInit');
     this.isLoading = true;
   }
 
   onPaymentSuccess($event: RavePaymentData) {
     this.orderId = shortid.generate();
 
-    console.log('success');
+    // console.log('success');
 
     this.paymentForm.patchValue({
       transactionId: $event.transaction_id,
     });
 
     const orderDate = this.optionsForm.value.deliveryDate;
-    console.log(orderDate);
+    // console.log(orderDate);
     this.optionsForm.patchValue({
       deliveryDate: new Date(orderDate).toISOString(),
     });
@@ -166,7 +166,7 @@ export class OrderComponent implements OnInit {
     };
 
     this.orderService.placeOrder(orderDetails).subscribe((message) => {
-      console.log('fasle spinner');
+      // console.log('fasle spinner');
       this.isLoading = false;
 
       this.snackBarService.closeSnackBar();

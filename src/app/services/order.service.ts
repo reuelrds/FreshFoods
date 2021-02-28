@@ -21,7 +21,7 @@ export class OrderService {
   ) {}
 
   placeOrder(order): Observable<{ message: String }> {
-    console.log(order);
+    // console.log(order);
 
     return this.httpClient.post<{ message: String }>(
       `${this.BACKEND_URL}/api/order`,
@@ -36,7 +36,7 @@ export class OrderService {
       )
       .pipe(
         map((response) => {
-          console.log(response);
+          // console.log(response);
           this._orders = response.orders;
           this.$orders.next(this._orders);
           this.snackBarService.displaySnackBar(

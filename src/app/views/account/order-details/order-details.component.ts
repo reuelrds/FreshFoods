@@ -19,7 +19,7 @@ export class OrderDetailsComponent implements OnInit {
           return <any>new Date(b.orderDate) - <any>new Date(a.orderDate);
         });
       }
-      console.log(orders);
+      // console.log(orders);
     });
   }
 }

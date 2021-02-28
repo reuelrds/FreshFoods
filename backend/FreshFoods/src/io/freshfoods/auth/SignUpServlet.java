@@ -94,7 +94,7 @@ public class SignUpServlet extends HttpServlet {
 			
 			int result = stmt.executeUpdate();
 			
-			System.out.println(result);
+			// System.out.println(result);
 			
 			// Get JWT Token
 			String jwtToken = Utils.getJWTToken(userId);
