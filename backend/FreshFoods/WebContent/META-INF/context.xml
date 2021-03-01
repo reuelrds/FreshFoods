@@ -3,5 +3,5 @@
 	<Resource name="jdbc/FreshFoods" auth="Container" type="javax.sql.DataSource"
         maxTotal="10" maxIdle="5" maxWait="10000"
         username="root" password="" driverClassName="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://3.17.143.248:3306/FreshFoods"/>
+        url="jdbc:mysql://127.0.0.1:3306/FreshFoods"/>
 </Context>
