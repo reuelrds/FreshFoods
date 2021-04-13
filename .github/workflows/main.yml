@@ -108,14 +108,42 @@ jobs:
             !.github/
             !.git/
 
-  # build:
-  #   needs: setup
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: dist
+  build-backend:
+    name: Build Backend
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: backend
 
-  #     - run: |
-  #         pwd
-  #         ls -la
+      - run: |
+          pwd
+          ls -la
+
+  build-frontend:
+    name: Build Frontend
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: frontend
+
+      - name: Setup Node 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build the Website
+        run: npm run build:ci
+
+      - name: Uploaded the Dist folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: frontend_dist
+          path: ./dist/freshfood
