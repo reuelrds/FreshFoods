@@ -166,8 +166,16 @@ jobs:
         with:
           node-version: "14.x"
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
       - name: Build the Website
         run: npm run build:prod
