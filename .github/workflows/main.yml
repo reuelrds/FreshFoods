@@ -85,6 +85,6 @@ jobs:
     needs: build
     steps:
       - run: |
-          pws
+          pwd
           ls -la
           cat "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
