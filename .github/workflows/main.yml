@@ -140,7 +140,7 @@ jobs:
         run: npm install
 
       - name: Build the Website
-        run: npm run build:ci
+        run: npm run build:prod
 
       - name: Uploaded the Dist folder
         uses: actions/upload-artifact@v2
