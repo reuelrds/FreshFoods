@@ -78,7 +78,7 @@ jobs:
         run: |
           cat > env.ts << EOF
           export const env = {
-            BACKEND_URL: '\${BACKEND_URL}',
+            BACKEND_URL: "\${BACKEND_URL}",
             RAVE_API_KEY: "\${{ secrets.RAVE_API_KEY }}",
           };
           EOF
