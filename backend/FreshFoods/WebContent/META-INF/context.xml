@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource name="jdbc/FreshFoods" auth="Container" type="javax.sql.DataSource"
+	<Resource name="jdbc/${ DATABASE_NAME }" auth="Container" type="javax.sql.DataSource"
         maxTotal="10" maxIdle="5" maxWait="10000"
-        username="root" password="" driverClassName="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://127.0.0.1:3306/FreshFoods"/>
+        username="${ DATABASE_USERNAME }" password="${ DATABASE_PASSWORD }" driverClassName="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://${ MYSQL_HOST }:${ MYSQL_PORT }/${ DATABASE_NAME }"/>
 </Context>
