@@ -96,6 +96,7 @@ jobs:
           pwd
           ls -la
           ls -l ${{ env.WEB_CONTENT_DIR }}
+          ls -l ${{ env.WEB_CONTENT_DIR }}/WEB-INF/
 
       - name: Upload The database artifacts
         uses: actions/upload-artifact@v2
@@ -104,71 +105,71 @@ jobs:
           path: |
             ${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
 
-      - name: Upload The Backend artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: backend
-          path: |
-            ./backend/FreshFoods
-            !${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
+      # - name: Upload The Backend artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: backend
+      #     path: |
+      #       ./backend/FreshFoods
+      #       !${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
 
-      - name: Upload The Frontend artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: frontend
-          path: |
-            .
-            !backend/
-            !.github/
-            !.git/
+      # - name: Upload The Frontend artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: frontend
+      #     path: |
+      #       .
+      #       !backend/
+      #       !.github/
+      #       !.git/
 
-  build-backend:
-    name: Build Backend
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: backend
+  # build-backend:
+  #   name: Build Backend
+  #   needs: setup
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: backend
 
-      - name: Setup Java Environment
-        uses: actions/setup-java@v2
-        with:
-          distribution: "adopt"
-          java-version: "15"
+  #     - name: Setup Java Environment
+  #       uses: actions/setup-java@v2
+  #       with:
+  #         distribution: "adopt"
+  #         java-version: "15"
 
-      - name: Package the backend into War File
-        run: mvn package
+  #     - name: Package the backend into War File
+  #       run: mvn package
 
-      - name: Uploaded the War file
-        uses: actions/upload-artifact@v2
-        with:
-          name: backend_dist
-          path: ./target/*.war
+  #     - name: Uploaded the War file
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: backend_dist
+  #         path: ./target/*.war
 
-  build-frontend:
-    name: Build Frontend
-    needs: setup
-    runs-on: ubuntu-latest
+  # build-frontend:
+  #   name: Build Frontend
+  #   needs: setup
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: frontend
+  #   steps:
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: frontend
 
-      - name: Setup Node 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14.x"
+  #     - name: Setup Node 14.x
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "14.x"
 
-      - name: Install Dependencies
-        run: npm install
+  #     - name: Install Dependencies
+  #       run: npm install
 
-      - name: Build the Website
-        run: npm run build:prod
+  #     - name: Build the Website
+  #       run: npm run build:prod
 
-      - name: Uploaded the Dist folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: frontend_dist
-          path: ./dist/freshfood
+  #     - name: Uploaded the Dist folder
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: frontend_dist
+  #         path: ./dist/freshfood
