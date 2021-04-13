@@ -126,6 +126,11 @@ jobs:
         with:
           name: backend_files
 
+      - name: Delete Backend files Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: backend_files
+
       - name: Setup Java Environment
         uses: actions/setup-java@v2
         with:
@@ -148,6 +153,11 @@ jobs:
 
     steps:
       - uses: actions/download-artifact@v2
+        with:
+          name: frontend_files
+
+      - name: Delete Frontend Files Artifact
+        uses: geekyeggo/delete-artifact@v1
         with:
           name: frontend_files
 
