@@ -92,20 +92,30 @@ jobs:
           input: "./src/environments/env.ts"
           output: "./src/environments/env.ts"
 
-      - name: Upload The artifacts
+      - name: Upload The Backend artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist
-          path: .
+          name: backend
+          path: ./backend/
 
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
+      - name: Upload The Frontend artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: frontend
+          path: |
+            .
+            !backend/
+            !.github/
+            !.git/
 
-      - run: |
-          pwd
-          ls -la
+  # build:
+  #   needs: setup
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: dist
+
+  #     - run: |
+  #         pwd
+  #         ls -la
