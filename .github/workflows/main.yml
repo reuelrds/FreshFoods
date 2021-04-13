@@ -64,17 +64,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - run : |
+        ls
+        pwd
+
       - name: Substitute Environment Variables in a database.sql File
         uses: danielr1996/envsubst-action@1.1.0
         with:
-          input: "${{ env.WEB_CONTENT_DIR }}/WEB_INF/database.sql"
-          output: "${{ env.WEB_CONTENT_DIR }}/WEB_INF/database.sql"
+          input: "${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
+          output: "${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
 
       - name: Substitute Environment Variables in a content.xml File
         uses: danielr1996/envsubst-action@1.1.0
         with:
-          input: "${{ env.WEB_CONTENT_DIR }}/META_INF/context.xml"
-          output: "${{ env.WEB_CONTENT_DIR }}/META_INF/context"
+          input: "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
+          output: "${{ env.WEB_CONTENT_DIR }}/META-INF/context"
 
       - name: Upload The artifacts
         uses: actions/upload-artifact@v2
