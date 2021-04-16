@@ -57,7 +57,7 @@ public class CORSFilter implements Filter {
     ((HttpServletResponse) response).addHeader(
         "Access-Control-Allow-Origin",
         // clientOrigin
-        *
+        "*"
       );
     ((HttpServletResponse) response).addHeader(
         "Access-Control-Allow-Methods",
