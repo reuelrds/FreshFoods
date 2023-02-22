@@ -1,0 +1,17 @@
+.rounded-shadow {
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    bottom: 0px;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    height: 50%;
+    border-radius: 100%;
+  }
+}
