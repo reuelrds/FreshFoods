@@ -1,11 +1,6 @@
 @import "../../shared/styles/variables";
 
 .account {
-  &__navbar {
-    height: 10vh;
-    background-color: #f0f4f8;
-  }
-
   &__main {
     height: 90vh;
     display: grid;

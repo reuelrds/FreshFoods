@@ -1,0 +1,10 @@
+@import "../../../shared/styles/variables";
+
+.navbar {
+  height: 10vh;
+  background-color: #f0f4f8;
+
+  &__active-icon {
+    color: $color-primary;
+  }
+}
