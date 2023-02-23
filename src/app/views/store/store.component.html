@@ -14,7 +14,9 @@
           />
           <div class="store__hero-content text-center">
             <h2>{{ heroItem.name }}</h2>
-            <button mat-raised-button>Add to Cart</button>
+            <button mat-raised-button (click)="addItemToCart(heroItem)">
+              Add to Cart
+            </button>
             <p>Starting at ${{ heroItem.price }} / {{ heroItem.unit }}</p>
           </div>
         </div>

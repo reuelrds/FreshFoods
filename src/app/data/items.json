@@ -2,49 +2,49 @@
   {
     "name": "Apple",
     "imageUrl": "/assets/apple.svg",
-    "price": "0.5",
+    "price": 0.5,
     "unit": "count"
   },
   {
     "name": "Banana",
     "imageUrl": "/assets/banana.svg",
-    "price": "0.25",
+    "price": 0.25,
     "unit": "count"
   },
   {
     "name": "Strawberry",
     "imageUrl": "/assets/strawberry.svg",
-    "price": "0.56",
+    "price": 0.56,
     "unit": "count"
   },
   {
     "name": "Broccoli",
     "imageUrl": "/assets/broccoli.svg",
-    "price": "0.2",
+    "price": 0.2,
     "unit": "head"
   },
   {
     "name": "Kale",
     "imageUrl": "/assets/kale.svg",
-    "price": "0.5",
+    "price": 0.5,
     "unit": "head"
   },
   {
     "name": "Lemon",
     "imageUrl": "/assets/lemon.svg",
-    "price": "0.8",
+    "price": 0.8,
     "unit": "count"
   },
   {
     "name": "Red Pepper",
     "imageUrl": "/assets/red-pepper.svg",
-    "price": "0.23",
+    "price": 0.23,
     "unit": "count"
   },
   {
     "name": "Orange",
     "imageUrl": "/assets/orange.svg",
-    "price": "0.9",
+    "price": 0.9,
     "unit": "count"
   }
 ]

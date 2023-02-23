@@ -19,6 +19,8 @@ import { NavbarComponent } from './views/shared/navbar/navbar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StoreComponent } from './views/store/store.component';
 import { MatRippleModule } from '@angular/material/core';
+import { CartComponent } from './views/cart/cart.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { MatRippleModule } from '@angular/material/core';
     AccountComponent,
     NavbarComponent,
     StoreComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatBadgeModule,
     MatRippleModule,
     NgxMaskModule.forRoot(),
   ],
