@@ -17,6 +17,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { NavbarComponent } from './views/shared/navbar/navbar.component';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StoreComponent } from './views/store/store.component';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     LoginComponent,
     AccountComponent,
     NavbarComponent,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatRippleModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [],
