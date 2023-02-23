@@ -11,25 +11,37 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  cart: Cart;
+  private _cart: Cart;
 
   private cartTotalItems = new BehaviorSubject(0);
   cartItems = this.cartTotalItems.asObservable();
 
-  constructor() {}
+  constructor() {
+    this._cart = {
+      items: [],
+      subTotal: 0,
+      delivery: 0,
+      totalPrice: 0,
+      itemCount: 0,
+    };
+  }
+
+  get cart() {
+    return this._cart;
+  }
 
   addItem(newItem: Item) {
     let subTotal;
     let items: Item[];
     let cartItemCount = 0;
 
-    if (!this.cart) {
+    if (!this._cart) {
       newItem.itemCount = 1;
       items = [newItem];
       cartItemCount = 1;
       subTotal = 0 + newItem.price;
     } else {
-      items = this.cart.items;
+      items = this._cart.items;
 
       if (_.includes(items, newItem)) {
         const itemIdx = _.findIndex(items, newItem);
@@ -40,13 +52,13 @@ export class CartService {
         console.log(newItem);
         items.push(newItem);
       }
-      cartItemCount = this.cart.itemCount + 1;
-      subTotal = this.cart.subTotal + newItem.price;
+      cartItemCount = this._cart.itemCount + 1;
+      subTotal = this._cart.subTotal + newItem.price;
     }
     const deliveryPrice = DeliveryType.Standard;
     const totalPrice = subTotal + DeliveryType.Standard;
 
-    this.cart = {
+    this._cart = {
       items: items,
       subTotal: subTotal,
       delivery: deliveryPrice,
@@ -54,8 +66,8 @@ export class CartService {
       itemCount: cartItemCount,
     };
 
-    this.cartTotalItems.next(this.cart.itemCount);
+    this.cartTotalItems.next(this._cart.itemCount);
 
-    console.log(this.cart);
+    console.log(this._cart);
   }
 }

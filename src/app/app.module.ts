@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AccountComponent } from './views/account/account.component';
+import { ProfileComponent } from './views/account/profile/profile.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { NavbarComponent } from './views/shared/navbar/navbar.component';
 
@@ -27,7 +27,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     AppComponent,
     SignupComponent,
     LoginComponent,
-    AccountComponent,
+    ProfileComponent,
     NavbarComponent,
     StoreComponent,
     CartComponent,
@@ -44,6 +44,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatTooltipModule,
     MatBadgeModule,
     MatRippleModule,
+
     NgxMaskModule.forRoot(),
   ],
   providers: [],

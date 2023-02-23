@@ -1,1 +1,111 @@
-<p>cart works!</p>
+<div class="container-fluid">
+  <freshfood-navbar></freshfood-navbar>
+</div>
+
+<div class="cart">
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-8">
+        <!-- <div class="row row-cols-4"> -->
+        <!-- <div class="col"> -->
+
+        <div
+          class="cart__empty"
+          *ngIf="cart.itemCount == 0; else cartSlides"
+        ></div>
+
+        <ng-template #cartSlides>
+          <div
+            class="carousel carousel-dark slide"
+            id="cartCarousel"
+            data-bs-interval="false"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#cartCarousel"
+                *ngFor="let itemGroup of renderItems; index as i"
+                [attr.data-bs-slide-to]="i"
+                [class.active]="i == 0"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <ng-container
+                *ngFor="let itemGroup of renderItems; first as isFirst"
+              >
+                <div class="carousel-item" [ngClass]="{ active: isFirst }">
+                  <div class="cart__item-container">
+                    <div
+                      class="cart__item shadow-lg"
+                      *ngFor="let item of itemGroup"
+                    >
+                      <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
+                      <h2>{{ item.name }}</h2>
+                      <p>${{ item.price * item.itemCount }}</p>
+                      <div class="increment-stepper">
+                        <button mat-icon-button>
+                          <mat-icon>remove</mat-icon>
+                        </button>
+                        <div class="text-center pr-5 pl-5">
+                          {{ item.itemCount }} {{ item.unit }}
+                        </div>
+                        <button mat-icon-button>
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#cartCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#cartCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-3 cart__amount shadow-lg">
+        <div class="cart__subtotal mb-1">
+          <div>Sub-Total</div>
+          <div class="">${{ cart.subTotal }}</div>
+        </div>
+        <div class="cart__delivery mb-1">
+          <div>(Standard) Delivery Fees</div>
+          <div class="">${{ cart.delivery }}</div>
+        </div>
+        <div class="cart__total mt-2 mb-4">
+          <div>Total</div>
+          <div class="">${{ cart.totalPrice }}</div>
+        </div>
+        <button mat-raised-button color="primary">Checkout</button>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>

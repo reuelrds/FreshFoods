@@ -1,0 +1,76 @@
+@import "../shared/styles/variables";
+
+.cart {
+  margin-top: 5rem;
+
+  &__item {
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    padding: 2rem;
+    background-color: $color-card-background;
+    color: $color-text;
+
+    margin: 3rem;
+
+    & p {
+      color: $color-text-light;
+      font-size: 1.2rem;
+    }
+
+    & img {
+      height: 15rem;
+    }
+
+    &-container {
+      width: fit-content;
+      margin: auto;
+      display: flex;
+    }
+
+    // margin: 2rem 2.5rem;
+  }
+  &__amount {
+    display: grid;
+    background-color: $color-card-background;
+    color: $color-text;
+
+    padding: 2rem 4rem;
+    font-size: 1.3rem;
+
+    border-radius: 5px;
+    margin-top: 4rem;
+    // place-items: center;
+
+    & > * {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & button {
+      display: block;
+      border-radius: 5px;
+      color: #fff;
+    }
+  }
+
+  &__total {
+    font-size: 2rem;
+  }
+}
+
+.increment-stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+
+  background-color: #fff;
+
+  color: $color-text;
+}
+
+.carousel-indicators {
+  margin-bottom: -1.5rem;
+}
