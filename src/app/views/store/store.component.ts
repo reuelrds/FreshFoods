@@ -5,6 +5,7 @@ import { ItemService } from 'src/app/services/item.service';
 
 import * as _ from 'lodash';
 import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/models/cart';
 
 @Component({
   selector: 'freshfood-store',
@@ -32,6 +33,10 @@ export class StoreComponent implements OnInit {
   }
 
   addItemToCart(item: Item) {
-    this.cartService.addItem(item);
+    const newCartItem: CartItem = {
+      ...item,
+      itemCount: 1,
+    };
+    this.cartService.addItem(newCartItem, 1);
   }
 }

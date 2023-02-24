@@ -4,5 +4,5 @@ export interface Item {
   imageUrl?: string;
   price?: number;
   unit?: string;
-  itemCount?: number;
+  // itemCount?: number;
 }

@@ -1,0 +1,37 @@
+.recipe-carousel {
+  &__container {
+    margin: 10rem 0;
+  }
+  &__item {
+    height: 90vh;
+    width: 100vw;
+    background-size: cover;
+
+    &-header {
+      font-size: 4.5rem;
+    }
+
+    &-desc {
+      font-size: 2rem;
+    }
+
+    &-buttons {
+      & button {
+        color: #fff;
+        font-size: 1.6rem;
+        min-width: 16rem;
+        padding: 0.5rem 2rem;
+      }
+    }
+  }
+}
+
+.recipe__navbar {
+  position: relative;
+  z-index: 2;
+}
+
+.carousel-chevron {
+  width: 3.5rem;
+  height: 3.5rem;
+}

@@ -21,6 +21,7 @@ import { StoreComponent } from './views/store/store.component';
 import { MatRippleModule } from '@angular/material/core';
 import { CartComponent } from './views/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { RecipeComponent } from './views/recipe/recipe.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     NavbarComponent,
     StoreComponent,
     CartComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,

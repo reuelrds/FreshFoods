@@ -1,0 +1,86 @@
+<div class="container-fluid recipe__navbar">
+  <freshfood-navbar></freshfood-navbar>
+</div>
+
+<div
+  class="recipe-carousel carousel slide"
+  id="recipeCarousel"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#recipeCarousel"
+      *ngFor="let recipe of recipes; index as i"
+      [attr.data-bs-slide-to]="i"
+      [class.active]="i == 0"
+    ></button>
+  </div>
+
+  <div class="carousel-inner">
+    <ng-container *ngFor="let recipe of recipes; index as i">
+      <div
+        class="carousel-item recipe-carousel__item"
+        [class.active]="i == 0"
+        [style.background-image]="
+          'linear-gradient(
+            rgba(0, 0, 0, 0.75), 
+            rgba(0, 0, 0, 0.75)
+          ), url(' +
+          recipe.imageUrl +
+          ')'
+        "
+      >
+        <!-- <img
+          [src]="recipe.imageUrl"
+          class="d-block w-100"
+          [alt]="recipe.name"
+        /> -->
+        <div class="carousel-caption d-none d-md-block mb-5">
+          <h2 class="recipe-carousel__item-header">{{ recipe.name }}</h2>
+          <p class="recipe-carousel__item-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+            consequatur, animi rem
+          </p>
+          <div class="recipe-carousel__item-buttons">
+            <button mat-raised-button color="primary" class="m-5">
+              Learn More
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              class="m-5"
+              (click)="addItemsToCart(recipe.ingredients)"
+            >
+              Add Ingredients to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#recipeCarousel"
+        data-bs-slide="prev"
+      >
+        <span
+          class="carousel-control-prev-icon carousel-chevron"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#recipeCarousel"
+        data-bs-slide="next"
+      >
+        <span
+          class="carousel-control-next-icon carousel-chevron"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+[
+  {
+    "id": "1",
+    "name": "Mixed Berry Melody",
+    "imageUrl": "/assets/1.jfif",
+    "difficulty": "easy",
+    "prepTime": 20,
+    "cookTime": 5,
+    "servingSize": 250,
+    "calories": 455,
+    "protein": 10,
+    "carbohydrates": 20,
+    "sugar": 5,
+    "fibre": 2,
+    "cholestrol": 20,
+    "sodium": 15,
+    "instructions": "<p> Start by taking the 4 strawberries, chop them into tiny segments and introduce the strawberry. Check to make sure that the strawberries and the strawberry sit well together, before slicing and dicing a lemon and adding it to this rather strange combination of fruits. </p> <p> Peel the 2 cherries, if it’s even possible to peel a cherry, discard the stalks and place them neatly next to the other fruits. </p> <p> Finish off this imaginary recipe by sourcing a mint leaf, and place it perfectly in the center of the bowl, taking care not to upset the other fruits that have already been placed. </p>",
+    "ingredients": [
+      {
+        "id": "1",
+        "name": "Apple",
+        "imageUrl": "/assets/apple.svg",
+        "price": 0.5,
+        "unit": "count",
+        "itemCount": 1
+      },
+      {
+        "id": "3",
+        "name": "Strawberry",
+        "imageUrl": "/assets/strawberry.svg",
+        "price": 0.56,
+        "unit": "count",
+        "itemCount": 4
+      },
+      {
+        "id": "6",
+        "name": "Lemon",
+        "imageUrl": "/assets/lemon.svg",
+        "price": 0.8,
+        "unit": "count",
+        "itemCount": 2
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Apple Tuna Salad",
+
+    "imageUrl": "/assets/2.jfif",
+    "difficulty": "medium",
+    "prepTime": 15,
+    "cookTime": 10,
+    "servingSize": 350,
+    "calories": 500,
+    "protein": 20,
+    "carbohydrates": 38,
+    "sugar": 9,
+    "fibre": 4,
+    "cholestrol": 26,
+    "sodium": 10,
+    "instructions": "<p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. At sapiente voluptates tenetur, esse impedit omnis tempora dolore deserunt architecto saepe nam in a pariatur. Labore nihil quis ea magnam rem? </p> <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ea alias </p> <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde est cumque necessitatibus, ullam tenetur saepe cupiditate fugiat ad ut incidunt rem ipsa iste doloribus quos delectus consequuntur esse quia minus? Nam harum, eveniet eaque incidunt voluptatem facilis officiis, nostrum corporis sunt saepe, fuga debitis porro sed rerum obcaecati beatae alias adipisci. Facere omnis repellat reprehenderit dicta consequuntur quis repellendus placeat! </p>",
+    "ingredients": [
+      {
+        "id": "1",
+        "name": "Apple",
+        "imageUrl": "/assets/apple.svg",
+        "price": 0.5,
+        "unit": "count",
+        "itemCount": 2
+      },
+      {
+        "id": "7",
+        "name": "Red Pepper",
+        "imageUrl": "/assets/red-pepper.svg",
+        "price": 0.23,
+        "unit": "count",
+        "itemCount": 4
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Kale Crunch",
+    "imageUrl": "/assets/3.jpg",
+    "difficulty": "easy",
+    "prepTime": 10,
+    "cookTime": 2,
+    "servingSize": 250,
+    "calories": 250,
+    "protein": 20,
+    "carbohydrates": 15,
+    "sugar": 8,
+    "fibre": 20,
+    "cholestrol": 10,
+    "sodium": 16,
+    "instructions": "<p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. At sapiente voluptates tenetur, esse impedit omnis tempora dolore deserunt architecto saepe nam in a pariatur. Labore nihil quis ea magnam rem? </p> <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ea alias </p> <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde est cumque necessitatibus, ullam tenetur saepe cupiditate fugiat ad ut incidunt rem ipsa iste doloribus quos delectus consequuntur esse quia minus? Nam harum, eveniet eaque incidunt voluptatem facilis officiis, nostrum corporis sunt saepe, fuga debitis porro sed rerum obcaecati beatae alias adipisci. Facere omnis repellat reprehenderit dicta consequuntur quis repellendus placeat! </p>",
+    "ingredients": [
+      {
+        "id": "5",
+        "name": "Kale",
+        "imageUrl": "/assets/kale.svg",
+        "price": 0.5,
+        "unit": "head",
+        "itemCount": 5
+      },
+      {
+        "id": "6",
+        "name": "Lemon",
+        "imageUrl": "/assets/lemon.svg",
+        "price": 0.8,
+        "unit": "count",
+        "itemCount": 2
+      }
+    ]
+  }
+]
