@@ -22,6 +22,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { CartComponent } from './views/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RecipeComponent } from './views/recipe/recipe.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RecipeComponent } from './views/recipe/recipe.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
