@@ -9,9 +9,10 @@ import { User } from '../models/user';
 export class AuthService {
   BACKEND_URL = 'http://localhost:8080/FreshFoods';
 
-  userId = null;
-  jwtToken = null;
-  jwtExpiration = null;
+  userId: String;
+  jwtToken: String;
+  jwtExpiration: Number;
+  user: User;
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -19,14 +20,32 @@ export class AuthService {
     console.log(user);
     this.httpClient
       .post<{
-        message: string;
-        userId: string;
-        jwtToken: string;
-        expiresin: number;
-      }>(`${this.BACKEND_URL}/SignUpServlet`, user)
+        message: String;
+        userId: String;
+        jwtToken: String;
+        expiresin: Number;
+      }>(`${this.BACKEND_URL}/auth/signup`, user)
       .subscribe((res) => {
         if (res.message === 'Signup Successfull') {
           this.userId = res.userId;
+          this.jwtToken = res.jwtToken;
+          this.jwtExpiration = res.expiresin;
+
+          this.router.navigate(['/store']);
+        }
+      });
+  }
+
+  login(loginDetails: { email: String; password: String }) {
+    this.httpClient
+      .post<{
+        message: String;
+        user: User;
+        jwtToken: String;
+        expiresin: Number;
+      }>(`${this.BACKEND_URL}/auth/login`, loginDetails)
+      .subscribe((res) => {
+        if (res.message === 'Signup Successfull') {
           this.jwtToken = res.jwtToken;
           this.jwtExpiration = res.expiresin;
 
