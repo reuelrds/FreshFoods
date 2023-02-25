@@ -111,7 +111,7 @@ public class SignUpServlet extends HttpServlet {
 			
 			
 		    responseData.addProperty("message", "Signup Successfull");
-		    responseData.addProperty("user", userData);
+		    responseData.add("user", userData);
 		    responseData.addProperty("jwtToken", jwtToken);
 		    responseData.addProperty("expiresin", Constants.EXPIRATION_TIME);
 		    

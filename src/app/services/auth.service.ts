@@ -1,30 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  BACKEND_URL = 'http://localhost:8080/FreshFoods';
+  BACKEND_URL = environment.BACKEND_URL;
 
-  private _userId: String;
   private _jwtToken: String;
   private _jwtExpiration: Number;
-  private _user: User;
-
-  get user() {
-    return this._user;
-  }
 
   get jwtToken() {
     return this._jwtToken;
   }
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private profileService: ProfileService
+  ) {}
 
-  registerUser(user: User) {
+  registerUser(user: { name: String; email: String; password: String }) {
     console.log(user);
     this.httpClient
       .post<{
@@ -35,9 +35,11 @@ export class AuthService {
       }>(`${this.BACKEND_URL}/auth/signup`, user)
       .subscribe((res) => {
         if (res.message === 'Signup Successfull') {
-          this._user = res.user;
+          // this._user = res.user;
           this._jwtToken = res.jwtToken;
           this._jwtExpiration = res.expiresin;
+
+          this.profileService.setUser(res.user);
 
           this.router.navigate(['/store']);
         }
@@ -56,7 +58,8 @@ export class AuthService {
         if (res.message === 'Login Successfull') {
           this._jwtToken = res.jwtToken;
           this._jwtExpiration = res.expiresin;
-          this._user = res.user;
+
+          this.profileService.setUser(res.user);
 
           this.router.navigate(['/store']);
         }
