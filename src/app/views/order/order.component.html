@@ -67,6 +67,23 @@
               </button>
             </div>
           </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Summary</ng-template>
+            <freshfood-details
+              [cart]="cart"
+              class="mt-5 mb-5"
+            ></freshfood-details>
+            <div class="mt-3">
+              <button
+                mat-raised-button
+                matStepperPrevious
+                color="primary"
+                class="order__stepper-button"
+              >
+                Back
+              </button>
+            </div>
+          </mat-step>
 
           <ng-template matStepperIcon="location">
             <mat-icon>edit_location</mat-icon>

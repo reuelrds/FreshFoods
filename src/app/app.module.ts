@@ -34,6 +34,8 @@ import { OptionsComponent } from './views/order/options/options.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PaymentComponent } from './views/order/payment/payment.component';
+import { DetailsComponent } from './views/order/details/details.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { PaymentComponent } from './views/order/payment/payment.component';
     AddressComponent,
     OptionsComponent,
     PaymentComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { PaymentComponent } from './views/order/payment/payment.component';
     MatStepperModule,
     MatMenuModule,
     MatRadioModule,
+    MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMaskModule.forRoot(),
