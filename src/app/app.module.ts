@@ -33,6 +33,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { OptionsComponent } from './views/order/options/options.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PaymentComponent } from './views/order/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     OrderComponent,
     AddressComponent,
     OptionsComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
