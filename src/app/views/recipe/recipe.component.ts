@@ -14,6 +14,7 @@ import { CartItem } from 'src/app/models/cart';
 })
 export class RecipeComponent implements OnInit {
   recipes: Recipe[];
+  isLoading: boolean;
 
   constructor(
     private recipeService: RecipeService,
@@ -21,7 +22,14 @@ export class RecipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recipes = this.recipeService.getRecipes();
+    this.isLoading = true;
+    this.recipeService.getRecipes().subscribe((recipes) => {
+      this.recipes = recipes;
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1500);
+    });
   }
 
   addItemsToCart(ingredients: RecipeItem[]) {

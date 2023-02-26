@@ -3,107 +3,91 @@
 </div>
 
 <div class="store">
-  <div class="store__hero d-block">
-    <div class="container-fluid h-100">
-      <div class="row d-flex justify-content-center h-100">
-        <div class="col-5 h-100 store__hero-image-container">
-          <img
-            src="{{ heroItem.imageUrl }}"
-            alt="{{ heroItem.name }}"
-            class=""
-          />
-          <div class="store__hero-content text-center">
-            <h2>{{ heroItem.name }}</h2>
-            <button mat-raised-button (click)="addItemToCart(heroItem)">
-              Add to Cart
-            </button>
-            <p>Starting at ${{ heroItem.price }} / {{ heroItem.unit }}</p>
+  <div class="container h-100" *ngIf="isLoading; else store">
+    <div class="row h-100">
+      <div class="col h-100 d-flex justify-content-center align-items-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #store>
+    <div class="store__hero d-block">
+      <div class="container-fluid h-100">
+        <div class="row d-flex justify-content-center h-100">
+          <div class="col-5 h-100 store__hero-image-container">
+            <img
+              src="{{ heroItem.imageUrl }}"
+              alt="{{ heroItem.name }}"
+              class=""
+            />
+            <div class="store__hero-content text-center">
+              <h2>{{ heroItem.name }}</h2>
+              <button mat-raised-button (click)="addItemToCart(heroItem)">
+                Add to Cart
+              </button>
+              <p>Starting at ${{ heroItem.price }} / {{ heroItem.unit }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="store__carousel">
-    <div
-      class="carousel carousel-dark slide h-100 w-100"
-      id="shopCarousel"
-      data-bs-interval="false"
-      #carousel
-    >
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#shopCarousel"
-          *ngFor="let itemGroup of renderItems; index as i"
-          [attr.data-bs-slide-to]="i"
-          [class.active]="i == 0"
-        ></button>
-      </div>
-      <div class="carousel-inner h-100">
-        <ng-container *ngFor="let itemGroup of renderItems; first as isFirst">
-          <div class="carousel-item h-100" [ngClass]="{ active: isFirst }">
-            <div class="h-100 d-flex store__carousel-items">
-              <div
-                class="store__carousel-container shadow-lg"
-                *ngFor="let item of itemGroup"
-                (click)="updateHeroItem(item)"
-                matRipple
-              >
-                <img src="{{ item.imageUrl }}" class="" alt="{{ item.name }}" />
-                <p class="text-center">{{ item.name }}</p>
+    <div class="store__carousel">
+      <div
+        class="carousel carousel-dark slide h-100 w-100"
+        id="shopCarousel"
+        data-bs-interval="false"
+        #carousel
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#shopCarousel"
+            *ngFor="let itemGroup of renderItems; index as i"
+            [attr.data-bs-slide-to]="i"
+            [class.active]="i == 0"
+          ></button>
+        </div>
+        <div class="carousel-inner h-100">
+          <ng-container *ngFor="let itemGroup of renderItems; first as isFirst">
+            <div class="carousel-item h-100" [ngClass]="{ active: isFirst }">
+              <div class="h-100 d-flex store__carousel-items">
+                <div
+                  class="store__carousel-container shadow-lg"
+                  *ngFor="let item of itemGroup"
+                  (click)="updateHeroItem(item)"
+                  matRipple
+                >
+                  <img
+                    src="{{ item.imageUrl }}"
+                    class=""
+                    alt="{{ item.name }}"
+                  />
+                  <p class="text-center">{{ item.name }}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </ng-container>
-        <!-- <div class="carousel-item active h-100">
-          <div class="h-100 d-flex store__carousel-items">
-            <div class="store__carousel-container shadow-lg">
-              <img src="/assets/apple.svg" class="" alt="..." />
-              <p class="text-center">Apple</p>
-            </div>
-            <div class="store__carousel-container shadow-lg">
-              <img src="/assets/banana.svg" class="" alt="..." />
-              <p class="text-center">Banana</p>
-            </div>
-            <div class="store__carousel-container shadow-lg">
-              <img src="/assets/broccoli.svg" class="" alt="..." />
-              <p class="text-center">Broccoli</p>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="carousel-item h-100">
-          <div class="h-100 d-flex store__carousel-items">
-            <div class="store__carousel-container shadow-lg">
-              <img src="/assets/lemon.svg" class="" alt="..." />
-              <p class="text-center">Lemon</p>
-            </div>
-
-            <div class="store__carousel-container shadow-lg">
-              <img src="/assets/strawberry.svg" class="" alt="..." />
-              <p class="text-center">Strawberry</p>
-            </div>
-          </div>
-        </div> -->
+          </ng-container>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#shopCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#shopCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#shopCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#shopCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-  </div>
+  </ng-template>
 </div>
