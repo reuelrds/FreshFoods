@@ -21,7 +21,7 @@ export class RecipeService {
   getRecipes(): Observable<Recipe[]> {
     return this.httpClient
       .get<{ recipes: Recipe[]; message: String }>(
-        `${this.BACKEND_URL}/recipes`
+        `${this.BACKEND_URL}/api/recipes`
       )
       .pipe(
         map((result) => {

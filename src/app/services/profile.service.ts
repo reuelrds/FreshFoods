@@ -27,7 +27,7 @@ export class ProfileService {
       .put<{
         message: String;
         user: User;
-      }>(`${this.BACKEND_URL}/profile`, user)
+      }>(`${this.BACKEND_URL}/api/profile`, user)
       .subscribe((response) => {
         console.log(response);
         this.$user.next(response.user);

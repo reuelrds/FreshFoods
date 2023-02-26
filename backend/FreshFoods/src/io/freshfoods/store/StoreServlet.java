@@ -28,7 +28,7 @@ import io.freshfoods.utils.Utils;
 /**
  * Servlet implementation class StoreServlet
  */
-@WebServlet(name="StoreServlet", urlPatterns= {"/store"})
+@WebServlet(name="StoreServlet", urlPatterns= {"/api/store"})
 public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -21,7 +21,7 @@ export class ItemService {
 
   getItems(): Observable<Item[]> {
     return this.httpClient
-      .get<{ items: Item[]; message: String }>(`${this.BACKEND_URL}/store`)
+      .get<{ items: Item[]; message: String }>(`${this.BACKEND_URL}/api/store`)
       .pipe(
         map((result) => {
           if (result.message == 'Items Retrieved Successfully') {

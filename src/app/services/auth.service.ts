@@ -12,7 +12,8 @@ export class AuthService {
   BACKEND_URL = environment.BACKEND_URL;
 
   private _jwtToken: String;
-  private _jwtExpiration: Number;
+  private _jwtExpiration;
+  isLoggedIn: boolean = false;
 
   get jwtToken() {
     return this._jwtToken;
@@ -35,11 +36,15 @@ export class AuthService {
       }>(`${this.BACKEND_URL}/auth/signup`, user)
       .subscribe((res) => {
         if (res.message === 'Signup Successfull') {
-          // this._user = res.user;
           this._jwtToken = res.jwtToken;
           this._jwtExpiration = res.expiresin;
 
+          this.isLoggedIn = true;
           this.profileService.setUser(res.user);
+
+          setTimeout(() => {
+            this.logout();
+          }, this._jwtExpiration);
 
           this.router.navigate(['/store']);
         }
@@ -59,10 +64,23 @@ export class AuthService {
           this._jwtToken = res.jwtToken;
           this._jwtExpiration = res.expiresin;
 
+          this.isLoggedIn = true;
           this.profileService.setUser(res.user);
+
+          setTimeout(() => {
+            this.logout();
+          }, this._jwtExpiration);
 
           this.router.navigate(['/store']);
         }
       });
+  }
+
+  logout() {
+    this._jwtToken = null;
+    this._jwtExpiration = null;
+
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

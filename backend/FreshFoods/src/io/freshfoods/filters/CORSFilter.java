@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class CORSFilter
  */
-@WebFilter(urlPatterns= {"/*"}, asyncSupported = true)
+@WebFilter(filterName = "CORSFilter", urlPatterns = {"/*"}, asyncSupported = true)
 public class CORSFilter implements Filter {
 
     /**
@@ -40,13 +40,14 @@ public class CORSFilter implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
         System.out.println("CORSFilter HTTP Request: " + req.getMethod());
-        System.out.println("CORSFilter HTTP Origin: " + req.getHeader("origin"));
+//        System.out.println("CORSFilter HTTP Origin: " + req.getHeader("origin"));
+        System.out.println("CORSFilter HTTP Auth: " + req.getHeader("Authorization"));
         String clientOrigin = req.getHeader("origin");
  
         // Authorize (allow) all domains to consume the content
         ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", clientOrigin);
         ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST");
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type");
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
  
         HttpServletResponse resp = (HttpServletResponse) response;
  
