@@ -38,6 +38,8 @@ import { DetailsComponent } from './views/order/details/details.component';
 import { MatListModule } from '@angular/material/list';
 import { AngularRaveModule } from 'angular-rave';
 import { environment } from 'src/environments/environment';
+import { OrderDetailsComponent } from './views/account/order-details/order-details.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { environment } from 'src/environments/environment';
     OptionsComponent,
     PaymentComponent,
     DetailsComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { environment } from 'src/environments/environment';
     MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ScrollingModule,
     NgxMaskModule.forRoot(),
     AngularRaveModule.forRoot(environment.RAVE_API_KEY),
   ],

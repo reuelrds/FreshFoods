@@ -46,33 +46,34 @@ public class AuthFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		
-		HttpServletRequest req = (HttpServletRequest) request;
-        System.out.println("Auth Header: " + req.getHeader("Authorization"));
-        
-        String authHeader =  req.getHeader("Authorization");
-        HttpServletResponse resp = (HttpServletResponse) response;
-        
-        if (authHeader == null) {
-        	resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The Request does not have Authorization Header");
-        } else {
-        	
-        	String jwtToken = authHeader.substring(7);
-        	System.out.println("jwt: " + jwtToken);
-        	
-        	try {
-        	    Algorithm algorithm = Algorithm.HMAC256(Constants.JWTSecret);
-        	    JWTVerifier verifier = JWT.require(algorithm)
-        	        .withIssuer(Constants.JWTIssuer)
-        	        .build();
-        	    DecodedJWT jwt = verifier.verify(jwtToken);
-        	    chain.doFilter(request, response);
-        	} catch (JWTVerificationException exception){
-        	    //Invalid signature/claims
-        		resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Authorization Header");
-        	}
-        }
+//		HttpServletRequest req = (HttpServletRequest) request;
+//        System.out.println("Auth Header: " + req.getHeader("Authorization"));
+//        
+//        String authHeader =  req.getHeader("Authorization");
+//        HttpServletResponse resp = (HttpServletResponse) response;
+//        
+//        if (authHeader == null) {
+//        	resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The Request does not have Authorization Header");
+//        } else {
+//        	
+//        	String jwtToken = authHeader.substring(7);
+//        	System.out.println("jwt: " + jwtToken);
+//        	
+//        	try {
+//        	    Algorithm algorithm = Algorithm.HMAC256(Constants.JWTSecret);
+//        	    JWTVerifier verifier = JWT.require(algorithm)
+//        	        .withIssuer(Constants.JWTIssuer)
+//        	        .build();
+//        	    DecodedJWT jwt = verifier.verify(jwtToken);
+//        	    chain.doFilter(request, response);
+//        	} catch (JWTVerificationException exception){
+//        	    //Invalid signature/claims
+//        		resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Authorization Header");
+//        	}
+//        }
 
 		// pass the request along the filter chain
+		chain.doFilter(request, response);
 	}
 
 	/**

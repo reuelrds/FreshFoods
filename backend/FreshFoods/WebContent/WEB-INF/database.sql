@@ -247,3 +247,10 @@ VALUES ("recipe1", "item1", 1),
 -- FROM Item
 --     INNER JOIN RecipeIngredient ON RecipeIngredient.ingredientId = Item.id
 -- WHERE RecipeIngredient.recipeId = "recipe1";
+Select *
+from Orders;
+SELECT *
+from Address;
+SELECT *
+FROM Orders
+    INNER JOIN Address ON Orders.deliveryAddressId = Address.id

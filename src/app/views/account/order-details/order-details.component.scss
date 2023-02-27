@@ -1,0 +1,127 @@
+@import "../../shared/styles/variables";
+
+.order-details {
+  height: 80vh;
+  margin-top: 10vh;
+
+  &__container {
+    padding: 3rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+
+    display: flex;
+    justify-content: space-around;
+    // align-items: center;
+
+    height: 70vh;
+
+    & .row {
+      // flex-grow: 1
+      flex-basis: 40rem;
+    }
+
+    // overflow: hidden;
+  }
+
+  &__list {
+    // height: 70vh;
+    list-style-type: none;
+    padding: 0;
+    // overflow: auto;
+  }
+  &__item {
+    background-color: $color-card-background;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem 1rem 1rem;
+    margin: 2rem;
+
+    &-count {
+      color: $color-text-light;
+      font-size: 1.6rem;
+      margin-right: 0.5rem;
+    }
+
+    &-price {
+      color: $color-text;
+
+      & h3 {
+        margin-bottom: 0;
+        font-size: 1.8rem;
+      }
+    }
+
+    & img {
+      width: 6rem;
+      height: 6rem;
+      margin-right: 1rem;
+    }
+
+    & h3 {
+      color: $color-text;
+      margin-bottom: 0;
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.order {
+  margin-top: 3rem;
+  &__amount {
+    display: grid;
+    background-color: $color-card-background;
+    color: $color-text;
+
+    padding: 2rem 4rem;
+    font-size: 1.3rem;
+
+    border-radius: 5px;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 2rem;
+
+    & > * {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & button {
+      display: block;
+      border-radius: 5px;
+      color: #fff;
+    }
+  }
+
+  &__total {
+    font-size: 2rem;
+  }
+}
+
+.viewport {
+  height: 50vh;
+  width: 35rem;
+}
+
+.details-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  font-size: 1.4rem;
+  color: $color-text-dark;
+}
+
+h3 {
+  font-size: 2rem;
+  color: $color-darker-grey;
+}
+
+.carousel-chevron {
+  width: 3.5rem;
+  height: 3.5rem;
+}

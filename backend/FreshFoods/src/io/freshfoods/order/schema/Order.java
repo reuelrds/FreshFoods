@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Order {
 
+	@SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("orderDate")
     @Expose
     private String orderDate;
@@ -22,6 +25,14 @@ public class Order {
     @Expose
     private Payment payment;
 
+    public String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+    	this.id = id;
+    }
+    
     public String getOrderDate() {
         return orderDate;
     }

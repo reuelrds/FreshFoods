@@ -3,6 +3,7 @@ package io.freshfoods.order;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import io.freshfoods.constants.Constants;
@@ -27,7 +29,7 @@ import io.freshfoods.order.schema.Order;
 /**
  * Servlet implementation class OrderServlet
  */
-@WebServlet("/api/placeOrder")
+@WebServlet(urlPatterns={"/api/order"})
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +46,175 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// Set Response Type Header
+		response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+		
+		Context initContext = null;
+		Context envContext = null;
+		DataSource ds = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet ordersResult = null;
+		ResultSet orderItemResult = null;
+		
+		// JSON Response Data Container
+		JsonObject responseData = new JsonObject();
+		
+		try {
+			
+			// Get Database COnnection
+			initContext = new InitialContext();
+			envContext = (Context) initContext.lookup("java:/comp/env");
+			ds = (DataSource) envContext.lookup("jdbc/FreshFoods");
+			conn = ds.getConnection();
+			
+			
+			// Get All Orders
+			stmt = (PreparedStatement) conn.prepareStatement(Constants.GET_ORDERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ordersResult = stmt.executeQuery();
+			
+			if (!ordersResult.next()) {
+				responseData.addProperty("message", "No Orders Placed Yet");
+				response.setStatus(HttpServletResponse.SC_OK);
+				
+			} else {
+				
+				// Reset Cursor
+				ordersResult.beforeFirst();
+				
+				
+				// Create a Container to Store Orders
+				JsonArray orders = new JsonArray();
+			
+				// Get the Result
+				while(ordersResult.next()) {
+					
+						
+					// Container for Order
+					JsonObject orderData = new JsonObject();
+					
+					// Populate the Container
+					orderData.addProperty("id", ordersResult.getString("id"));
+					orderData.addProperty("orderDate", ordersResult.getString("orderDate"));
+					orderData.addProperty("transactionId", ordersResult.getString("transactionId"));
+					orderData.addProperty("subTotal", ordersResult.getDouble("subTotal"));
+					orderData.addProperty("totalPrice", ordersResult.getDouble("totalPrice"));
+					orderData.addProperty("totalItemCount", ordersResult.getDouble("totalItemCount"));
+				
+					// Container for Order Delivery Data
+					JsonObject deliveryData = new JsonObject();
+					
+					// Populate Delivery Data
+					deliveryData.addProperty("deliveryDate", ordersResult.getString("deliveryDate"));
+					deliveryData.addProperty("deliveryCost", ordersResult.getDouble("deliveryCost"));
+					
+					// Container for Order Delivery Address
+					JsonObject deliveryAddressData = new JsonObject();
+					
+					// Populate Delivery AddressData
+					deliveryAddressData.addProperty("addressLine1", ordersResult.getString("addressLine1"));
+					deliveryAddressData.addProperty("addressLine2", ordersResult.getString("addressLine2"));
+					deliveryAddressData.addProperty("city", ordersResult.getString("city"));
+					deliveryAddressData.addProperty("state", ordersResult.getString("state"));
+					deliveryAddressData.addProperty("zipcode", ordersResult.getString("zipcode"));
+					
+					
+					// Add delivery Address Data to delivery Date
+					deliveryData.add("deliveryAddress", deliveryAddressData);
+					
+					// Add Delivery Data to order data
+					orderData.add("delivery", deliveryData);
+					
+					
+					/**
+					 * Get Order Items
+					 */
+					
+					// Create a Container to Store Ingredients
+					JsonArray orderItems = new JsonArray();
+					
+					// Create a Prepared Statement and Execute the Query
+					stmt = (PreparedStatement) conn.prepareStatement(Constants.GET_ORDER_ITEMS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+					stmt.setString(1, ordersResult.getString("id"));
+					orderItemResult = stmt.executeQuery();
+					
+					
+					if (!orderItemResult.next()) {
+						responseData.addProperty("message", "Error");
+						responseData.addProperty("errorDetails", "Error Retrieveing Order Items from the Database.");
+						response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+					} else {
+						
+						// Reset Cursor
+						orderItemResult.beforeFirst();
+					
+						// Get the Result
+						while(orderItemResult.next()) {
+							
+								
+							// Container for item Details
+							JsonObject itemData = new JsonObject();
+							
+							// Populate the container
+							itemData.addProperty("id", orderItemResult.getString("id"));
+							itemData.addProperty("name", orderItemResult.getString("name"));
+							itemData.addProperty("imageUrl", orderItemResult.getString("imageUrl"));
+							itemData.addProperty("price", orderItemResult.getDouble("price"));
+							itemData.addProperty("unit", orderItemResult.getString("unit"));
+							itemData.addProperty("itemCount", orderItemResult.getInt("itemCount"));
+							itemData.addProperty("description", orderItemResult.getString("description"));
+							itemData.addProperty("storage", orderItemResult.getString("storage"));
+							itemData.addProperty("origin", orderItemResult.getString("origin"));
+							itemData.addProperty("preparation", orderItemResult.getString("preparation"));
+							
+							
+							// Add Item to Items Array
+							orderItems.add(itemData);
+//							orderItems.add(itemData);
+							
+							
+						}
+						
+					}
+					
+					orderData.add("orderItems", orderItems);
+					orders.add(orderData);
+				
+				}
+				
+				// Populate Final response
+				responseData.add("orders", orders);
+				responseData.addProperty("message", "Orders Retrieved Successfully");
+				
+				response.setStatus(HttpServletResponse.SC_OK);
+			
+			}
+		} catch (NamingException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+				initContext.close();
+			} catch (SQLException | NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				responseData.addProperty("message", "Error");
+				responseData.addProperty("errorDetails", e.getMessage());
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
+			
+			
+		}
+		
+		String responseDataJson = new Gson().toJson(responseData);
+		response.getWriter().write(responseDataJson);
+		response.getWriter().flush();
+		
 	}
 
 	/**
@@ -92,7 +262,8 @@ public class OrderServlet extends HttpServlet {
 			
 			
 			// Insert Order Details
-			String orderId = UUID.randomUUID().toString();
+//			String orderId = UUID.randomUUID().toString();
+			String orderId = order.getId();
 			
 			stmt = (PreparedStatement) conn.prepareStatement(Constants.INSERT_ORDER);
 			stmt.setString(1, orderId);
