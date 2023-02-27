@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Cart } from 'src/app/models/cart';
+
+import { RaveOptions, RavePaymentData } from 'angular-rave';
+import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'freshfood-order',
@@ -16,7 +20,7 @@ export class OrderComponent implements OnInit {
     delivery: 1.99,
     items: [
       {
-        id: '1',
+        id: 'item1',
         name: 'Apple',
         imageUrl: '/assets/apple.svg',
         price: 0.5,
@@ -24,7 +28,7 @@ export class OrderComponent implements OnInit {
         itemCount: 2,
       },
       {
-        id: '2',
+        id: 'item2',
         name: 'Banana',
         imageUrl: '/assets/banana.svg',
         price: 0.25,
@@ -32,7 +36,7 @@ export class OrderComponent implements OnInit {
         itemCount: 5,
       },
       {
-        id: '3',
+        id: 'item3',
         name: 'Strawberry',
         imageUrl: '/assets/strawberry.svg',
         price: 0.56,
@@ -49,9 +53,15 @@ export class OrderComponent implements OnInit {
   paymentForm: FormGroup;
   orderForm: FormGroup;
 
+  raveOptions: RaveOptions;
+
   @ViewChild('stepper') stepper: MatStepper;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private cartService: CartService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
     this.addressForm = this.formBuilder.group({
@@ -68,16 +78,61 @@ export class OrderComponent implements OnInit {
     });
 
     this.paymentForm = this.formBuilder.group({
-      cardNumber: '',
-      firstName: '',
-      lastName: '',
-      expiry: '',
-      cvc: '',
+      transactionId: '',
+    });
+
+    this.orderForm = this.formBuilder.group({
+      address: this.addressForm,
+      deliveryOptions: this.optionsForm,
+      payment: this.paymentForm,
     });
   }
 
-  ngAfterViewInit() {
-    // this.stepper.selectedIndex = 1;
-    console.log(this.stepper.selectedIndex);
+  onAddressSubmit() {}
+
+  onOptionsSubmit() {
+    this.cart.delivery = this.optionsForm.value['deliveryType'];
+    this.cart.totalPrice = this.cart.subTotal + this.cart.delivery;
+    this.raveOptions = {
+      customer: {
+        name: 'Arimus Black',
+        email: 'ari@lsu.edu',
+        phonenumber: this.addressForm.value.phone,
+      },
+      amount: this.cart.totalPrice,
+      tx_ref: `${Math.random() * 1000000}`,
+      customizations: {
+        title: 'Fresh Foods',
+        description: 'Lorem Ipsum',
+        logo: 'http://localhost:4200/assets/logo-small.svg',
+      },
+    };
+  }
+
+  onPaymentSuccess($event: RavePaymentData | String) {
+    // this.paymentForm.patchValue({
+    //   transactionId: $event.transaction_id,
+    // });
+    this.paymentForm.patchValue({
+      transactionId: $event,
+    });
+
+    const orderDate = this.optionsForm.value.deliveryDate;
+    console.log(orderDate);
+    this.optionsForm.patchValue({
+      deliveryDate: new Date(orderDate).toISOString(),
+    });
+
+    let orderDetails = this.orderForm.value;
+    orderDetails = {
+      orderDate: new Date().toISOString(),
+      cart: {
+        ...this.cart,
+      },
+      ...orderDetails,
+    };
+
+    // console.log(this.orderForm.value);
+    this.orderService.placeOrder(orderDetails);
   }
 }

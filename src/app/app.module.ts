@@ -36,6 +36,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PaymentComponent } from './views/order/payment/payment.component';
 import { DetailsComponent } from './views/order/details/details.component';
 import { MatListModule } from '@angular/material/list';
+import { AngularRaveModule } from 'angular-rave';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { MatListModule } from '@angular/material/list';
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMaskModule.forRoot(),
+    AngularRaveModule.forRoot(environment.RAVE_API_KEY),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

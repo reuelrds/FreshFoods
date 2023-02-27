@@ -50,6 +50,34 @@ CREATE TABLE RecipeIngredient(
     FOREIGN KEY (ingredientId) REFERENCES Item(id),
     UNIQUE (recipeId, ingredientId)
 );
+CREATE TABLE Address(
+    id VARCHAR(36) PRIMARY KEY,
+    addressLine1 VARCHAR(50),
+    addressLine2 VARCHAR(50),
+    city VARCHAR(20),
+    state VARCHAR(20),
+    zipcode VARCHAR(10)
+);
+CREATE TABLE Orders(
+    id VARCHAR(36) PRIMARY KEY,
+    orderDate VARCHAR(50),
+    transactionId VARCHAR(50),
+    deliveryDate VARCHAR(50),
+    deliveryCost DECIMAL,
+    deliveryAddressId VARCHAR(36),
+    subTotal DECIMAL,
+    totalPrice DECIMAL,
+    totalItemCount INTEGER,
+    FOREIGN KEY (deliveryAddressId) REFERENCES Address(id)
+);
+CREATE TABLE OrderItems(
+    orderId VARCHAR(36),
+    itemId VARCHAR(36),
+    itemCount INTEGER,
+    FOREIGN KEY (orderId) REFERENCES Orders(id),
+    FOREIGN KEY (itemId) REFERENCES Item(id),
+    UNIQUE (orderId, itemId)
+);
 INSERT INTO Item
 VALUES (
         "item1",

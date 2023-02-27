@@ -47,7 +47,23 @@
           {{ cart.totalPrice | currency: "USD":"symbol":".2-2" }}
         </div>
       </div>
-      <button mat-raised-button color="primary">Place Order</button>
+      <!-- <button
+        mat-raised-button
+        color="primary"
+        angular-rave
+        [raveOptions]="raveOptions"
+        (callback)="paymentSuccessfull($event)"
+        (onclose)="paymentClose()"
+      >
+        Place Order
+      </button> -->
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="paymentSuccessfull('ff')"
+      >
+        Place Order
+      </button>
     </div>
   </div>
 </div>

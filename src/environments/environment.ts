@@ -1,10 +1,12 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { env } from './env';
 
 export const environment = {
   production: false,
-  BACKEND_URL: 'http://localhost:8080/FreshFoods',
+  BACKEND_URL: env.BACKEND_URL,
+  RAVE_API_KEY: env.RAVE_API_KEY,
 };
 
 /*
