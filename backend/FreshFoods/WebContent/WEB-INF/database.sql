@@ -1,16 +1,10 @@
 SET @STATIC_FILES_URL = "http://localhost:4200";
 CREATE TABLE User(
-    id VARCHAR(36),
+    id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(20),
     email VARCHAR(20),
     password VARCHAR(72),
     phone VARCHAR(10),
-    addressLine1 VARCHAR(50),
-    addressLine2 VARCHAR(50),
-    city VARCHAR(20),
-    state VARCHAR(20),
-    zipcode VARCHAR(10),
-    PRIMARY KEY (id),
     UNIQUE(email)
 );
 CREATE TABLE Item(
@@ -56,17 +50,19 @@ CREATE TABLE Address(
     addressLine2 VARCHAR(50),
     city VARCHAR(20),
     state VARCHAR(20),
-    zipcode VARCHAR(10)
+    zipcode VARCHAR(10),
+    userId VARCHAR(36),
+    FOREIGN KEY (userId) REFERENCES User(id)
 );
 CREATE TABLE Orders(
     id VARCHAR(36) PRIMARY KEY,
     orderDate VARCHAR(50),
     transactionId VARCHAR(50),
     deliveryDate VARCHAR(50),
-    deliveryCost DECIMAL,
+    deliveryCost DECIMAL(10, 2),
     deliveryAddressId VARCHAR(36),
-    subTotal DECIMAL,
-    totalPrice DECIMAL,
+    subTotal DECIMAL(10, 2),
+    totalPrice DECIMAL(10, 2),
     totalItemCount INTEGER,
     FOREIGN KEY (deliveryAddressId) REFERENCES Address(id)
 );
@@ -253,4 +249,8 @@ SELECT *
 from Address;
 SELECT *
 FROM Orders
-    INNER JOIN Address ON Orders.deliveryAddressId = Address.id
+    INNER JOIN Address ON Orders.deliveryAddressId = Address.id;
+select *
+from user,
+    address
+where user.id = address.userId;

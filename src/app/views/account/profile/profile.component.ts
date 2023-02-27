@@ -34,15 +34,15 @@ export class ProfileComponent implements OnInit {
     this.profileService.$user.subscribe((user) => {
       this.user = user;
 
-      this.profileForm = new FormGroup({
-        name: new FormControl(this.user.name),
-        email: new FormControl(this.user.email),
-        phone: new FormControl(this.user.phone),
-        addressline1: new FormControl(this.user.addressLine1),
-        addressline2: new FormControl(this.user.addressLine2),
-        city: new FormControl(this.user.city),
-        state: new FormControl(this.user.state),
-        zipcode: new FormControl(this.user.zipcode),
+      this.profileForm = this.formBuilder.group({
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        addressLine1: user.addressLine1,
+        addressLine2: user.addressLine2,
+        city: user.city,
+        state: user.state,
+        zipcode: user.zipcode,
       });
 
       this.toggleFormVisibility();
@@ -69,6 +69,7 @@ export class ProfileComponent implements OnInit {
 
     const newUser = {
       id: this.user.id,
+      addressId: this.user.addressID ? this.user.addressID : '',
       ...this.profileForm.value,
     };
 

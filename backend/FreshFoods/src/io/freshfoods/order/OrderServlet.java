@@ -114,6 +114,8 @@ public class OrderServlet extends HttpServlet {
 					// Container for Order Delivery Address
 					JsonObject deliveryAddressData = new JsonObject();
 					
+
+					
 					// Populate Delivery AddressData
 					deliveryAddressData.addProperty("addressLine1", ordersResult.getString("addressLine1"));
 					deliveryAddressData.addProperty("addressLine2", ordersResult.getString("addressLine2"));
@@ -248,7 +250,12 @@ public class OrderServlet extends HttpServlet {
 			
 			// Insert Delivery Address
 			Address address = order.getAddress();
+			
+			// Get AddressId
 			String addressId = UUID.randomUUID().toString();
+			
+			// Get UserId
+			String userId = request.getAttribute("userId").toString();
 			
 			stmt = (PreparedStatement) conn.prepareStatement(Constants.INSERT_DELIVERY_ADDRESS);
 			stmt.setString(1, addressId);
@@ -257,6 +264,7 @@ public class OrderServlet extends HttpServlet {
 			stmt.setString(4, address.getCity());
 			stmt.setString(5, address.getState());
 			stmt.setString(6, address.getZipcode());
+//			stmt.setString(7, userId);
 			
 			stmt.executeUpdate();
 			

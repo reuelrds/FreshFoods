@@ -102,11 +102,12 @@ public class LoginServlet extends HttpServlet {
 						// Container for User Details
 						JsonObject userData = new JsonObject();
 						
-						// Populate teh container
+						// Populate the container
 						userData.addProperty("id", result.getString("id"));
 						userData.addProperty("name", result.getString("name"));
 						userData.addProperty("email", result.getString("email"));
 						userData.addProperty("phone", result.getString("phone"));
+						userData.addProperty("addressID", result.getString("address.id"));
 						userData.addProperty("addressLine1", result.getString("addressLine1"));
 						userData.addProperty("addressLine2", result.getString("addressLine2"));
 						userData.addProperty("city", result.getString("city"));
@@ -114,7 +115,7 @@ public class LoginServlet extends HttpServlet {
 						userData.addProperty("zipcode", result.getString("zipcode"));
 						
 						// Get JWT Token
-						String jwtToken = Utils.getJWTToken();
+						String jwtToken = Utils.getJWTToken(result.getString("id"));
 
 						
 						// Set Authorization Header

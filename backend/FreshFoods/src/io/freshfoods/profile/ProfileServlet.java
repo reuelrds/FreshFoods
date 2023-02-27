@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -53,8 +54,20 @@ public class ProfileServlet extends HttpServlet {
 		JsonObject data = new Gson().fromJson(request.getReader(), JsonObject.class);
 		System.out.println(data);
 		
-		// Retrieve Email and Password
+		// Retrieve UserId and AddressId
 		String id = data.get("id").getAsString();
+		
+		String retrievedAddressID = data.get("addressId").getAsString();
+		String addressId;
+		
+		// Create AddressId if it is empty
+		if (retrievedAddressID.equals("")) {
+			addressId = UUID.randomUUID().toString();
+		} else {
+			addressId = retrievedAddressID;
+		}
+		
+		System.out.println("AddressId: " + addressId);
 
 		Context initContext = null;
 		Context envContext = null;
@@ -74,22 +87,38 @@ public class ProfileServlet extends HttpServlet {
 			ds = (DataSource) envContext.lookup("jdbc/FreshFoods");
 			conn = ds.getConnection();
 			
+			// Update User
 			stmt = (PreparedStatement) conn.prepareStatement(Constants.UPDATE_USER);
 			stmt.setString(1, getStringData(data, "name"));
 			stmt.setString(2, getStringData(data, "email"));
 			stmt.setString(3, getStringData(data, "phone"));
-			stmt.setString(4, getStringData(data, "addressLine1"));
-			stmt.setString(5, getStringData(data, "addressLine2"));
-			stmt.setString(6, getStringData(data, "city"));
-			stmt.setString(7, getStringData(data, "state"));
-			stmt.setString(8, getStringData(data, "zipcode"));
-			stmt.setString(9, id);
+			stmt.setString(4, id);
 			
 			stmt.executeUpdate();
 			
 			
-			stmt = (PreparedStatement) conn.prepareStatement(Constants.GET_USER_FROM_ID, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			stmt.setString(1, id);
+			
+			// Update User Address
+			stmt = (PreparedStatement) conn.prepareStatement(Constants.INSERT_USER_ADDRESS);
+			stmt.setString(1, addressId);
+			stmt.setString(2, getStringData(data, "addressLine1"));
+			stmt.setString(3, getStringData(data, "addressLine2"));
+			stmt.setString(4, getStringData(data, "city"));
+			stmt.setString(5, getStringData(data, "state"));
+			stmt.setString(6, getStringData(data, "zipcode"));
+			stmt.setString(7, id);
+			stmt.setString(8, getStringData(data, "addressLine1"));
+			stmt.setString(9, getStringData(data, "addressLine2"));
+			stmt.setString(10, getStringData(data, "city"));
+			stmt.setString(11, getStringData(data, "state"));
+			stmt.setString(12, getStringData(data, "zipcode"));
+			
+			stmt.executeUpdate();
+
+			
+			
+			
+			stmt = (PreparedStatement) conn.prepareStatement(Constants.GET_USER, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			result = stmt.executeQuery();
 			
@@ -112,10 +141,11 @@ public class ProfileServlet extends HttpServlet {
 					JsonObject userData = new JsonObject();
 					
 					// Populate the container
-					userData.addProperty("id", result.getString("id"));
+					userData.addProperty("id", result.getString("userId"));
 					userData.addProperty("name", result.getString("name"));
 					userData.addProperty("email", result.getString("email"));
 					userData.addProperty("phone", result.getString("phone"));
+					userData.addProperty("addressID", result.getString("address.id"));
 					userData.addProperty("addressLine1", result.getString("addressLine1"));
 					userData.addProperty("addressLine2", result.getString("addressLine2"));
 					userData.addProperty("city", result.getString("city"));
