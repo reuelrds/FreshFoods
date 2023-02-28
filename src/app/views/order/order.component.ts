@@ -12,6 +12,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'freshfood-order',
@@ -129,7 +130,7 @@ export class OrderComponent implements OnInit {
       customizations: {
         title: 'Fresh Foods',
         description: 'Lorem Ipsum',
-        logo: 'http://localhost:4200/assets/logo-small.svg',
+        logo: `${environment.BACKEND_URL}/FreshFoods/assets/logo-small.svg`,
       },
     };
   }
