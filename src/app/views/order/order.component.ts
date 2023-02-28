@@ -130,18 +130,18 @@ export class OrderComponent implements OnInit {
       customizations: {
         title: 'Fresh Foods',
         description: 'Lorem Ipsum',
-        logo: `${environment.FRONTEND_URL}/assets/logo-small.svg`,
+        logo: 'http://3.139.60.126/FreshFoods/assets/logo-small.svg',
       },
     };
   }
 
   onPaymentInit() {
     // console.log('paymentInit');
-    this.isLoading = true;
   }
 
   onPaymentSuccess($event: RavePaymentData) {
     this.orderId = shortid.generate();
+    this.isLoading = true;
 
     // console.log('success');
 
