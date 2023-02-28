@@ -28,7 +28,7 @@ export class AuthService {
   ) {}
 
   registerUser(user: { name: String; email: String; password: String }) {
-    console.log(user);
+    // console.log(user);
     this.httpClient
       .post<{
         message: String;
@@ -54,7 +54,7 @@ export class AuthService {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.snackBarService.displaySnackBar('error', 'OK');
         }
       );
@@ -86,7 +86,7 @@ export class AuthService {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           this.snackBarService.displaySnackBar(
             'An Error Occoured. Please Try Again',
             'OK'

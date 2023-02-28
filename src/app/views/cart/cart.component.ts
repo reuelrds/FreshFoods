@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
       this.cart = cart;
       // this.changeDetector.detectChanges();
       this.renderItems = _.chunk(this.cart.items, 2);
-      console.log(this.cart);
+      // console.log(this.cart);
     });
   }
 

@@ -56,14 +56,14 @@ export class ProfileComponent implements OnInit {
   }
 
   editAccountDetails() {
-    console.log('Edit');
+    // console.log('Edit');
     this.disabled = false;
     this.toggleFormVisibility();
   }
 
   submitAccountDetails() {
     this.disabled = true;
-    console.log(this.profileForm, this.disabled);
+    // console.log(this.profileForm, this.disabled);
     this.toggleFormVisibility();
 
     const newUser = {
@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
       ...this.profileForm.value,
     };
 
-    console.log(newUser);
+    // console.log(newUser);
 
     const user = _.mapValues(newUser, (value) => {
       if (value == null) {

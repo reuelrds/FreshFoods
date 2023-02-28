@@ -34,7 +34,7 @@ export class ProfileService {
       }>(`${this.BACKEND_URL}/api/profile`, user)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.$user.next(response.user);
           this.snackBarService.displaySnackBar(
             'Profile Update Successfull',

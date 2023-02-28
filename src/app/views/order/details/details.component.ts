@@ -25,7 +25,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   onClick() {
-    console.log(this.raveOptions);
+    // console.log(this.raveOptions);
   }
 
   onPaymentInit() {
