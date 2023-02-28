@@ -6,6 +6,7 @@ import { Item } from '../models/item';
 import * as _ from 'lodash';
 
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class CartService {
 
   private cart = new BehaviorSubject<Cart>(this._cart);
 
-  constructor() {}
+  constructor(private snackBarService: SnackbarService) {}
 
   getCart(): Observable<Cart> {
     return this.cart.asObservable();
@@ -60,6 +61,10 @@ export class CartService {
 
     this.cartTotalItems.next(this._cart.itemCount);
     this.cart.next(this._cart);
+    this.snackBarService.displaySnackBar(
+      `${newItem.name} added to Cart`,
+      'Done'
+    );
   }
 
   removeItem(itemId: string) {
@@ -99,6 +104,10 @@ export class CartService {
 
     this.cartTotalItems.next(this._cart.itemCount);
     this.cart.next(this._cart);
+    this.snackBarService.displaySnackBar(
+      `${removedItem.name} removed from Cart`,
+      'Done'
+    );
   }
 
   clearCart() {

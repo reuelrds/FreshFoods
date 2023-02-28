@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/order';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +15,24 @@ export class OrderService {
   _orders: Order[];
   $orders = new ReplaySubject<Order[]>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private snackBarService: SnackbarService
+  ) {}
 
   placeOrder(order): Observable<{ message: String }> {
     console.log(order);
 
-    return this.httpClient.post<{ message: String }>(
-      `${this.BACKEND_URL}/api/order`,
-      order
-    );
+    return this.httpClient
+      .post<{ message: String }>(`${this.BACKEND_URL}/api/order`, order)
+      .pipe(
+        tap((message) => {
+          this.snackBarService.displaySnackBar(
+            'Order Placedt Successfully',
+            'Done'
+          );
+        })
+      );
   }
 
   getOrders() {
@@ -35,6 +45,10 @@ export class OrderService {
           console.log(response);
           this._orders = response.orders;
           this.$orders.next(this._orders);
+          this.snackBarService.displaySnackBar(
+            'Fetching Previous Orders',
+            'Done'
+          );
           return response.orders;
         })
       );

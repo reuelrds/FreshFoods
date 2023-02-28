@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { map } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,10 @@ export class ItemService {
 
   $item = new ReplaySubject<Item[]>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private snackBarService: SnackbarService
+  ) {}
 
   getItems(): Observable<Item[]> {
     return this.httpClient
