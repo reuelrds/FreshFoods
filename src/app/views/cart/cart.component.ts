@@ -4,6 +4,7 @@ import { Item } from 'src/app/models/item';
 import { CartService } from 'src/app/services/cart.service';
 
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'freshfood-cart',
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,5 +37,9 @@ export class CartComponent implements OnInit {
 
   decrementItem(item: CartItem) {
     this.cartService.removeItem(item.id);
+  }
+
+  onSubmit() {
+    this.router.navigate(['/order']);
   }
 }

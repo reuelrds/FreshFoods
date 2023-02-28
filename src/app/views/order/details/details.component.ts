@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 export class DetailsComponent implements OnInit {
   @Input() cart: Cart;
   @Input() raveOptions: RaveOptions;
+  @Input() isLoading: boolean;
 
   @Output() onSuccessPayment = new EventEmitter<RavePaymentData | String>();
 

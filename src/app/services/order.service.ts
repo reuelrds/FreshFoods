@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/order';
@@ -16,12 +16,13 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) {}
 
-  placeOrder(order) {
+  placeOrder(order): Observable<{ message: String }> {
     console.log(order);
 
-    this.httpClient
-      .post(`${this.BACKEND_URL}/api/order`, order)
-      .subscribe((result) => console.log(result));
+    return this.httpClient.post<{ message: String }>(
+      `${this.BACKEND_URL}/api/order`,
+      order
+    );
   }
 
   getOrders() {

@@ -15,3 +15,28 @@
     border-radius: 100%;
   }
 }
+
+.circ-spinner {
+  $size: 2rem;
+  $speed: 0.5s;
+  // margin: 1em;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  animation: circ-anim $speed linear infinite;
+  border-width: 0px;
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  border-right: 3px solid transparent;
+}
+
+@keyframes circ-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -7,6 +7,7 @@
     class="carousel carousel-dark slide h-100"
     id="orderCarousel"
     data-bs-interval="false"
+    *ngIf="orders; else emptyOrders"
   >
     <div class="carousel-indicators">
       <button
@@ -147,69 +148,9 @@
                               </div>
                             </div>
                           </cdk-virtual-scroll-viewport>
-                          <!-- <li
-                            class="order-details__item shadow"
-                            *ngFor="let item of order.orderItems"
-                          > -->
-                          <!-- <div class="left d-flex align-items-center">
-                              <img
-                                matListAvatar
-                                [src]="item.imageUrl"
-                                [alt]="item.name"
-                              />
-                              <h3>{{ item.name }}</h3>
-                            </div>
-                            <div class="right d-flex align-items-center">
-                              <div
-                                class="div d-flex align-items-center order-details__item-count"
-                              >
-                                <span class="me-2">{{ item.itemCount }}</span>
-                                <span>{{ item.unit }}</span>
-                              </div>
-                              <div
-                                class="div d-flex align-items-center ms-3 order-details__item-price"
-                              >
-                                <h3>
-                                  {{
-                                    item.itemCount * item.price
-                                      | currency: "USD":"symbol":".2-2"
-                                  }}
-                                </h3>
-                              </div>
-                            </div> -->
-                          <!-- </li> -->
                         </ul>
                       </div>
                     </div>
-                    <!-- <div class="row">
-                      <div class="col order__amount shadow-lg">
-                        <div class="order__subtotal mb-1">
-                          <div>Sub-Total</div>
-                          <div class="">
-                            {{
-                              order.subTotal | currency: "USD":"symbol":".2-2"
-                            }}
-                          </div>
-                        </div>
-                        <div class="order__delivery mb-1">
-                          <div>(Standard) Delivery Fees</div>
-                          <div class="">
-                            {{
-                              order.delivery.deliveryCost
-                                | currency: "USD":"symbol":".2-2"
-                            }}
-                          </div>
-                        </div>
-                        <div class="order__total mt-2 mb-4">
-                          <div>Total</div>
-                          <div class="">
-                            {{
-                              order.totalPrice | currency: "USD":"symbol":".2-2"
-                            }}
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </div>
@@ -244,115 +185,19 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-4">
 
-        <div class="order-details__container shadow-lg">
-          <div class="row mb-4">
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <h3>Order Id: {{ order.id | slice: 0:8 }}</h3>
-                  <p>{{ order.orderDate | date }}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <h3>Deliver To:</h3>
-
-                  <div class="row">
-                    <div class="col">
-                      {{ order.delivery.deliveryAddress.addressLine1 }}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      {{ order.delivery.deliveryAddress.addressLine2 }}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      {{ order.delivery.deliveryAddress.city }},
-                      {{ order.delivery.deliveryAddress.state }}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      {{ order.delivery.deliveryAddress.zipcode }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <ul class="order-details__list">
-                <li
-                  class="order-details__item shadow"
-                  *ngFor="let item of order.orderItems"
-                >
-                  <div class="left d-flex align-items-center">
-                    <img
-                      matListAvatar
-                      [src]="item.imageUrl"
-                      [alt]="item.name"
-                    />
-                    <h3>{{ item.name }}</h3>
-                  </div>
-                  <div class="right d-flex align-items-center">
-                    <div
-                      class="div d-flex align-items-center order-details__item-count"
-                    >
-                      <span class="me-2">{{ item.itemCount }}</span>
-                      <span>{{ item.unit }}</span>
-                    </div>
-                    <div
-                      class="div d-flex align-items-center ms-3 order-details__item-price"
-                    >
-                      <h3>
-                        {{
-                          item.itemCount * item.price
-                            | currency: "USD":"symbol":".2-2"
-                        }}
-                      </h3>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col order__amount shadow-lg">
-              <div class="order__subtotal mb-1">
-                <div>Sub-Total</div>
-                <div class="">
-                  {{ order.subTotal | currency: "USD":"symbol":".2-2" }}
-                </div>
-              </div>
-              <div class="order__delivery mb-1">
-                <div>(Standard) Delivery Fees</div>
-                <div class="">
-                  {{
-                    order.delivery.deliveryCost
-                      | currency: "USD":"symbol":".2-2"
-                  }}
-                </div>
-              </div>
-              <div class="order__total mt-2 mb-4">
-                <div>Total</div>
-                <div class="">
-                  {{ order.totalPrice | currency: "USD":"symbol":".2-2" }}
-                </div>
-              </div>
-            </div>
-          </div>
+  <ng-template #emptyOrders>
+    <div class="container pt-5">
+      <div class="row pt-5">
+        <div class="col"></div>
+        <div
+          class="col-8 text-center d-flex flex-column align-items-center justify-content-center"
+        >
+          <img src="/assets/no-orders.svg" alt="" />
+          <h2 class="mt-5 emptyCart">No Orders Yet!!</h2>
         </div>
-      
+        <div class="col"></div>
       </div>
-      <div class="col"></div>
     </div>
-  </div> -->
+  </ng-template>
 </div>

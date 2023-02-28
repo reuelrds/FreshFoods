@@ -71,9 +71,14 @@ public class OrderServlet extends HttpServlet {
 			ds = (DataSource) envContext.lookup("jdbc/FreshFoods");
 			conn = ds.getConnection();
 			
+			// Get User Id
+			String userId = request.getAttribute("userId").toString();
+			
 			
 			// Get All Orders
 			stmt = (PreparedStatement) conn.prepareStatement(Constants.GET_ORDERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setString(1, userId);
+			
 			ordersResult = stmt.executeQuery();
 			
 			if (!ordersResult.next()) {
@@ -283,6 +288,7 @@ public class OrderServlet extends HttpServlet {
 			stmt.setDouble(7, order.getCart().getSubTotal());
 			stmt.setDouble(8, order.getCart().getTotalPrice());
 			stmt.setInt(9, order.getCart().getItemCount());
+			stmt.setString(10, userId);
 			
 			stmt.executeUpdate();
 			

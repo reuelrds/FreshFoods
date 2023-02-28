@@ -64,6 +64,8 @@ CREATE TABLE Orders(
     subTotal DECIMAL(10, 2),
     totalPrice DECIMAL(10, 2),
     totalItemCount INTEGER,
+    userId VARCHAR(36),
+    FOREIGN KEY (userId) REFERENCES User(id),
     FOREIGN KEY (deliveryAddressId) REFERENCES Address(id)
 );
 CREATE TABLE OrderItems(

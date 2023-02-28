@@ -22,9 +22,9 @@ public class Constants {
   public static final String GET_RECIPE_INGREDIENTS = "SELECT Item.*,  RecipeIngredient.ingredientItemCount FROM Item INNER JOIN RecipeIngredient ON RecipeIngredient.ingredientId = Item.id WHERE RecipeIngredient.recipeId = ?";
 
   public static final String INSERT_DELIVERY_ADDRESS = "INSERT INTO Address (id, addressLine1, addressLine2, city, state, zipcode) values(?, ?, ?, ?, ?, ?)";
-  public static final String INSERT_ORDER = "INSERT INTO Orders values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  public static final String INSERT_ORDER = "INSERT INTO Orders values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   public static final String INSERT_ORDER_ITEMS = "INSERT INTO OrderItems values(?, ?, ?)";
 
-  public static final String GET_ORDERS = "SELECT * FROM Orders INNER JOIN Address ON Orders.deliveryAddressId = Address.id";
+  public static final String GET_ORDERS = "SELECT * FROM Orders INNER JOIN Address ON Orders.deliveryAddressId = Address.id WHERE Orders.userId = ?";
   public static final String GET_ORDER_ITEMS = "SELECT Item.*,  OrderItems.itemCount FROM Item INNER JOIN OrderItems ON OrderItems.itemId = Item.id WHERE OrderItems.orderId = ?";
 }

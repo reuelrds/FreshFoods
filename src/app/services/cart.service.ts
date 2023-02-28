@@ -30,6 +30,11 @@ export class CartService {
     return this.cart.asObservable();
   }
 
+  setCart(cart: Cart) {
+    this.cartTotalItems.next(cart.itemCount);
+    this.cart.next(cart);
+  }
+
   addItem(newItem: CartItem, itemCount: number) {
     let items: CartItem[] = this._cart.items;
 
@@ -94,5 +99,17 @@ export class CartService {
 
     this.cartTotalItems.next(this._cart.itemCount);
     this.cart.next(this._cart);
+  }
+
+  clearCart() {
+    this._cart = {
+      items: [],
+      subTotal: 0,
+      delivery: 0,
+      totalPrice: 0,
+      itemCount: 0,
+    };
+    this.cart.next(this._cart);
+    this.cartTotalItems.next(this._cart.itemCount);
   }
 }
