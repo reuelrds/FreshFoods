@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { ProfileService } from './profile.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',

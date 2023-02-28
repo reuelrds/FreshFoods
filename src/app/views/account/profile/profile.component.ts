@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit {
         state: user.state,
         zipcode: user.zipcode,
       });
-
       this.toggleFormVisibility();
     });
   }

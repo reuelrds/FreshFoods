@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <freshfood-navbar></freshfood-navbar>
+  <freshfood-navbar [active]="'store'"></freshfood-navbar>
 </div>
 
 <div class="store">
@@ -75,7 +75,10 @@
           data-bs-target="#shopCarousel"
           data-bs-slide="prev"
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span
+            class="carousel-control-prev-icon carousel-chevron"
+            aria-hidden="true"
+          ></span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button
@@ -84,7 +87,10 @@
           data-bs-target="#shopCarousel"
           data-bs-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span
+            class="carousel-control-next-icon carousel-chevron"
+            aria-hidden="true"
+          ></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
