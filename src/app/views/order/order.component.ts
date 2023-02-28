@@ -11,6 +11,7 @@ import * as shortid from 'shortid';
 import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'freshfood-order',
@@ -74,7 +75,8 @@ export class OrderComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -119,7 +121,7 @@ export class OrderComponent implements OnInit {
       customer: {
         name: this.user.name,
         email: this.user.email,
-        phonenumber: this.user.phone,
+        phonenumber: this.addressForm.value.phone,
       },
       amount: this.cart.totalPrice,
       tx_ref: `${shortid.generate()}`,
@@ -131,40 +133,49 @@ export class OrderComponent implements OnInit {
     };
   }
 
-  onPaymentSuccess($event: RavePaymentData | String) {
+  onPaymentInit() {
+    console.log('paymentInit');
     this.isLoading = true;
+  }
+
+  onPaymentSuccess($event: RavePaymentData) {
     this.orderId = shortid.generate();
 
-    setTimeout(() => {
-      this.paymentForm.patchValue({
-        transactionId: $event,
-      });
+    console.log('success');
 
-      const orderDate = this.optionsForm.value.deliveryDate;
-      console.log(orderDate);
-      this.optionsForm.patchValue({
-        deliveryDate: new Date(orderDate).toISOString(),
-      });
+    this.paymentForm.patchValue({
+      transactionId: $event.transaction_id,
+    });
 
-      let orderDetails = this.orderForm.value;
-      orderDetails = {
-        id: this.orderId,
-        orderDate: new Date().toISOString(),
-        cart: {
-          ...this.cart,
-        },
-        ...orderDetails,
-      };
+    const orderDate = this.optionsForm.value.deliveryDate;
+    console.log(orderDate);
+    this.optionsForm.patchValue({
+      deliveryDate: new Date(orderDate).toISOString(),
+    });
 
-      // console.log(this.orderForm.value);
-      this.orderService.placeOrder(orderDetails).subscribe((message) => {
-        this.isLoading = false;
-        this.cartService.clearCart();
+    let orderDetails = this.orderForm.value;
+    orderDetails = {
+      id: this.orderId,
+      orderDate: new Date().toISOString(),
+      cart: {
+        ...this.cart,
+      },
+      ...orderDetails,
+    };
 
-        this.isOrderSuccessfull = true;
+    // console.log(this.orderForm.value);
+    this.orderService.placeOrder(orderDetails).subscribe((message) => {
+      console.log('fasle spinner');
+      this.isLoading = false;
 
-        this.router.navigate(['/store']);
-      });
-    }, 2000);
+      this.snackBarService.closeSnackBar();
+      this.cartService.clearCart();
+
+      this.isOrderSuccessfull = true;
+
+      this.router.navigate(['/store']);
+    });
+    // setTimeout(() => {
+    // }, 2000);
   }
 }
