@@ -75,7 +75,7 @@ The Frontend, the Backend, and the Database are hosted in separate AWS EC2 insta
   ***Note: You can also edit the database name in the database.sql file***
 
  * ### Update the Credentials to Connect to the Database
-    Update the ***web.xml*** file located in *PROJECT_ROOT/backend/FreshFoods/WebContent/META-INF*
+    Update the ***context.xml*** file located in *PROJECT_ROOT/backend/FreshFoods/WebContent/META-INF*
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
