@@ -72,7 +72,7 @@ The Frontend, the Backend, and the Database are hosted in separate AWS EC2 insta
   mysql> exit;
   ```
 
-  ***Note: You can also edit the database name in the database.sql file***
+
 
  * ### Update the Credentials to Connect to the Database
     Update the ***context.xml*** file located in *PROJECT_ROOT/backend/FreshFoods/WebContent/META-INF*
@@ -83,7 +83,7 @@ The Frontend, the Backend, and the Database are hosted in separate AWS EC2 insta
 	<Resource name="jdbc/YOUR_DATABASE_NAME" auth="Container" type="javax.sql.DataSource"
         maxTotal="10" maxIdle="5" maxWait="10000"
         username="YOUR_DATABASE_USERNAME" password="YOUR_DATABASE_PASSWORD" driverClassName="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://MYSQL_HOST:PORT/YOUR_DATABASE_NAME"/>
+        url="jdbc:mysql://MYSQL_HOST:PORT/FreshFoods"/>
 </Context>
 ```
     
