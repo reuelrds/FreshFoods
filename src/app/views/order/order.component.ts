@@ -58,7 +58,7 @@ export class OrderComponent implements OnInit {
   cart: Cart;
   user: User;
 
-  isLoading: boolean = false;
+  isLoading: boolean;
   isOrderSuccessfull = false;
   orderId = '';
 
@@ -112,6 +112,8 @@ export class OrderComponent implements OnInit {
       deliveryOptions: this.optionsForm,
       payment: this.paymentForm,
     });
+
+    this.isLoading = false;
   }
 
   onAddressSubmit() {}
@@ -137,14 +139,12 @@ export class OrderComponent implements OnInit {
   }
 
   onPaymentInit() {
-    // console.log('paymentInit');
+    console.log('paymentInit');
+    // this.isLoading = true;
   }
 
   onPaymentSuccess($event: RavePaymentData) {
     this.orderId = shortid.generate();
-    this.isLoading = true;
-
-    // console.log('success');
 
     this.paymentForm.patchValue({
       transactionId: $event.transaction_id,
@@ -167,7 +167,8 @@ export class OrderComponent implements OnInit {
     };
 
     this.orderService.placeOrder(orderDetails).subscribe((message) => {
-      // console.log('fasle spinner');
+      // console.log('success');
+      console.log('fasle spinner');
       this.isLoading = false;
 
       this.snackBarService.closeSnackBar();

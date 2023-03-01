@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { RaveOptions, RavePaymentData } from 'angular-rave';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
@@ -10,7 +18,7 @@ import * as $ from 'jquery';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnChanges {
   @Input() cart: Cart;
   @Input() raveOptions: RaveOptions;
   @Input() isLoading: boolean;
@@ -18,7 +26,10 @@ export class DetailsComponent implements OnInit {
   @Output() onSuccessPayment = new EventEmitter<RavePaymentData>();
   @Output() onPayinit = new EventEmitter<void>();
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   event: RavePaymentData;
 
@@ -28,22 +39,26 @@ export class DetailsComponent implements OnInit {
     // console.log(this.raveOptions);
   }
 
-  onPaymentInit() {
-    this.onPayinit.emit();
+  ngOnChanges() {
+    // console.log(this.isLoading);
+    // console.log('success: !! ', this.isLoading);
   }
+
+  onPaymentInit() {}
 
   paymentSuccessfull($event) {
     // console.log($event);
     // this.onSuccessPayment.emit($event);
     this.event = $event;
+    this.isLoading = true;
+    this.cd.detectChanges();
+    setTimeout(() => {
+      this.onSuccessPayment.emit(this.event);
+    }, 5000);
   }
 
   paymentClose() {
     // Remove the Rave Pay IFrame
     $(document).find('iframe')[0].remove();
-
-    setTimeout(() => {
-      this.onSuccessPayment.emit(this.event);
-    }, 3000);
   }
 }
