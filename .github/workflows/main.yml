@@ -2,66 +2,82 @@
 
 name: Build Website
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
-
   # Allows you to run this workflow manually via an API call
   workflow_dispatch:
     inputs:
-    
       # Front End and Backend URL
       FRONTEND_URL:
-        description: 'Front End URL'
+        description: "Front End URL"
         required: true
-        default: 'http://localhost:4200'
+        default: "http://localhost:4200"
+
       BACKEND_URL:
-        description: 'Front End URL'
+        description: "Backend End URL"
         required: true
-        default: 'http://localhost:4200'
-        
+        default: "http://localhost:8080/FreshFoods"
+
       # MySQL related variables.
       DATABASE_NAME:
-        description: 'Front End URL'
+        description: "Database Name"
         required: true
-        default: 'http://localhost:4200'
+        default: "FreshFoods"
+
       DATABASE_USERNAME:
-        description: 'Front End URL'
+        description: "MySQL Database Username"
         required: true
-        default: 'http://localhost:4200'
+        default: "root"
+
       DATABASE_PASSWORD:
-        description: 'Front End URL'
+        description: "MySQL Database Password"
         required: true
-        default: 'http://localhost:4200'
+        default: ""
 
       MYSQL_HOST:
-        description: 'Front End URL'
+        description: "MySQL Service Host"
         required: true
-        default: 'http://localhost:4200'
-      MYSQL_PORT:
-        description: 'Front End URL'
-        required: true
-        default: 'http://localhost:4200'
-      
-      
+        default: "127.0.0.1"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+      MYSQL_PORT:
+        description: "MySQL Service Port"
+        required: true
+        default: "3306"
+
+# Set Inputs as Environment Variables as envsubst requries environment variables
+# for substitution.
+env:
+  MYSQL_HOST: ${{ github.event.inputs.MYSQL_HOST }}
+  MYSQL_PORT: ${{ github.event.inputs.MYSQL_PORT }}
+  BACKEND_URL: ${{ github.event.inputs.BACKEND_URL }}
+  FRONTEND_URL: ${{ github.event.inputs.FRONTEND_URL }}
+  DATABASE_NAME: ${{ github.event.inputs.DATABASE_NAME }}
+  DATABASE_USERNAME: ${{ github.event.inputs.DATABASE_USERNAME }}
+  DATABASE_PASSWORD: ${{ github.event.inputs.DATABASE_PASSWORD }}
+  WEB_CONTENT_DIR: "./backend/FreshFoods/WebContent"
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Substitute Environment Variables in a database.sql File
+        uses: danielr1996/envsubst-action@1.1.0
+        with:
+          input: "${{ env.WEB_CONTENT_DIR }}/WEB_INF/database.sql"
+          output: "${{ env.WEB_CONTENT_DIR }}/WEB_INF/database.sql"
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Substitute Environment Variables in a content.xml File
+        uses: danielr1996/envsubst-action@1.1.0
+        with:
+          input: "${{ env.WEB_CONTENT_DIR }}/META_INF/context.xml"
+          output: "${{ env.WEB_CONTENT_DIR }}/META_INF/context"
+
+      - name: Upload The artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ${{ env.WEB_CONTENT_DIR }}
