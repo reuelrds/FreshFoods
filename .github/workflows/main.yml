@@ -92,11 +92,20 @@ jobs:
           input: "./src/environments/env.ts"
           output: "./src/environments/env.ts"
 
+      - name: Upload The database artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: database
+          path: |
+            ${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
+
       - name: Upload The Backend artifacts
         uses: actions/upload-artifact@v2
         with:
           name: backend
-          path: ./backend/
+          path: |
+            ./backend/FreshFoods
+            !${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
 
       - name: Upload The Frontend artifacts
         uses: actions/upload-artifact@v2
@@ -117,9 +126,14 @@ jobs:
         with:
           name: backend
 
-      - run: |
-          pwd
-          ls -la
+      - name: Package the backend into War File
+        run: mvn package
+
+      - name: Uploaded the War file
+        uses: actions/upload-artifact@v2
+        with:
+          name: backend_dist
+          path: ./target/*.war
 
   build-frontend:
     name: Build Frontend
