@@ -74,17 +74,18 @@ jobs:
           input: "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
           output: "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
 
+      - name: Create env.ts file for the frontend
+        run: |
+          env.ts < cat << EOF
+          export const env = {
+            BACKEND_URL: '\${BACKEND_URL}',
+            RAVE_API_KEY: "\${{ secrets.RAVE_API_KEY }}",
+          };
+          EOF
+          mv env.ts ./src/environments/
+
       - name: Upload The artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
           path: .
-          
-  compile:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - run: |
-          pwd
-          ls -la
-          cat "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
