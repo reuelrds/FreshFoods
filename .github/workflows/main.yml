@@ -92,6 +92,11 @@ jobs:
           input: "./src/environments/env.ts"
           output: "./src/environments/env.ts"
 
+      - run: |
+          pwd
+          ls -la
+          ls -l ${{ env.WEB_CONTENT_DIR }}
+
       - name: Upload The database artifacts
         uses: actions/upload-artifact@v2
         with:
