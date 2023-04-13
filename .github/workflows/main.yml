@@ -31,8 +31,6 @@ on:
 
       DATABASE_PASSWORD:
         description: "MySQL Database Password"
-        required: true
-        default: ""
 
       MYSQL_HOST:
         description: "MySQL Service Host"
@@ -64,10 +62,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - run: |
-          ls
-          pwd
-
       - name: Substitute Environment Variables in a database.sql File
         uses: danielr1996/envsubst-action@1.1.0
         with:
@@ -78,10 +72,10 @@ jobs:
         uses: danielr1996/envsubst-action@1.1.0
         with:
           input: "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
-          output: "${{ env.WEB_CONTENT_DIR }}/META-INF/context"
+          output: "${{ env.WEB_CONTENT_DIR }}/META-INF/context.xml"
 
       - name: Upload The artifacts
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: ${{ env.WEB_CONTENT_DIR }}
+          path: .
