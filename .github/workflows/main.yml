@@ -126,6 +126,12 @@ jobs:
         with:
           name: backend
 
+      - name: Setup Java Environment
+        uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: "15"
+
       - name: Package the backend into War File
         run: mvn package
 
