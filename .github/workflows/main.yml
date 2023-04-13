@@ -79,10 +79,16 @@ jobs:
           cat > env.ts << EOF
           export const env = {
             BACKEND_URL: "\${BACKEND_URL}",
-            RAVE_API_KEY: "\${{ secrets.RAVE_API_KEY }}",
+            RAVE_API_KEY: "${{ secrets.RAVE_API_KEY }}",
           };
           EOF
           mv env.ts ./src/environments/
+
+      - name: Substitute Environment Variables in a env.ts File
+        uses: danielr1996/envsubst-action@1.1.0
+        with:
+          input: "./src/environments/env.ts"
+          output: "./src/environments/env.ts"
 
       - name: Upload The artifacts
         uses: actions/upload-artifact@v2
