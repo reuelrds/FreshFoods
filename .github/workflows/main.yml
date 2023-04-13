@@ -55,7 +55,7 @@ env:
   WEB_CONTENT_DIR: "./backend/FreshFoods/WebContent"
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
 
     steps:
@@ -83,6 +83,8 @@ jobs:
           };
           EOF
           mv env.ts ./src/environments/
+          echo "Hello"
+          echo $GITHUB_WORKSPACE
 
       - name: Substitute Environment Variables in a env.ts File
         uses: danielr1996/envsubst-action@1.1.0
@@ -95,3 +97,14 @@ jobs:
         with:
           name: dist
           path: .
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+
+      - run: |
+          pwd
+          ls -la
