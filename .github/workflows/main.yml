@@ -64,9 +64,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - run : |
-        ls
-        pwd
+      - run: |
+          ls
+          pwd
 
       - name: Substitute Environment Variables in a database.sql File
         uses: danielr1996/envsubst-action@1.1.0
