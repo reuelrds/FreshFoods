@@ -102,7 +102,7 @@ jobs:
       - name: Upload The Backend artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: backend
+          name: backend_files
           path: |
             ./backend/FreshFoods
             !${{ env.WEB_CONTENT_DIR }}/WEB-INF/database.sql"
@@ -110,7 +110,7 @@ jobs:
       - name: Upload The Frontend artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: frontend
+          name: frontend_files
           path: |
             .
             !backend/
@@ -124,12 +124,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: backend
-
-      - name: Delete backend Artifact
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: backend
+          name: backend_files
 
       - name: Setup Java Environment
         uses: actions/setup-java@v2
@@ -154,12 +149,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: frontend
-
-      - name: Delete Frontend Artifact
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: frontend
+          name: frontend_files
 
       - name: Setup Node 14.x
         uses: actions/setup-node@v1
