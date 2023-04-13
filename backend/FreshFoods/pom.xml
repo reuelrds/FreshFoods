@@ -12,6 +12,7 @@
   </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <finalName>FreshFoods</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
