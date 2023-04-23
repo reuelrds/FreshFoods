@@ -1,0 +1,84 @@
+<div class="signup container-fluid">
+  <div class="signup__navbar row rounded-shadow">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+      <img src="assets/logo-small.svg" alt="Fresh Foods Logo" class="" />
+    </div>
+  </div>
+
+  <div class="signup__container row d-flex justify-content-center">
+    <div class="col-xl-4 col-md-6 col-sm-8 col-12 text-center">
+      <div class="shadow d-flex flex-column justify-content-around h-100 p-5">
+        <div class="row">
+          <div class="col">
+            <h1 class="signup__header">Create Account</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form [formGroup]="signUpForm">
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="name" />
+                <mat-icon matPrefix>person</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-icon matPrefix>email</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                />
+                <mat-icon matPrefix>https</mat-icon>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  type="button"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              mat-raised-button
+              class="signup__submit-button w-100 rounded-pill pt-1 pb-1"
+              (click)="onSubmit()"
+            >
+              Create Account
+            </button>
+
+            <button
+              mat-button
+              class="signup__create-button mt-3"
+              routerLink="/login"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signup__details row">
+    <!-- <p class="signup__details-text">
+      The Fresh Foods website is a demo project and is not optimized for mobile devices.
+    </p>
+    <p class="signup__details-text">
+    The default email and password for the demo account are: testuser@email.com and freshfoods
+  </p> -->
+  </div>
+</div>

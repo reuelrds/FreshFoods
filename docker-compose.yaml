@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  db:
+    build:
+      context: ./database
+      args:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        FRONTEND_URL: ${FRONTEND_URL}
+    container_name: mymysql_container
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  tomcat:
+    build:
+      context: ./backend
+      args:
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_HOST: ${MYSQL_HOST}
+        MYSQL_PORT: ${MYSQL_PORT}
+        SERVLET_CONTEXT_NAME: ${SERVLET_CONTEXT_NAME}
+    container_name: tomcat_container
+    ports:
+      - "8623:8080"
+    depends_on:
+      - db
+    volumes:
+      - war_data:/usr/local/tomcat/webapps
+    networks:
+      - backend
+  
+  apache:
+    build:
+      context: ./frontend
+      args:
+        BACKEND_URL: ${BACKEND_URL}
+        RAVE_API_KEY: ${RAVE_API_KEY} 
+    container_name: apache_frontend
+    ports:
+      - "5478:80"
+    networks:
+      - frontend
+
+volumes:
+  db_data:
+  war_data:
+
+networks:
+  backend:
+  frontend:

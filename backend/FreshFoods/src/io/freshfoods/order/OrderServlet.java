@@ -269,7 +269,7 @@ public class OrderServlet extends HttpServlet {
 			stmt.setString(4, address.getCity());
 			stmt.setString(5, address.getState());
 			stmt.setString(6, address.getZipcode());
-//			stmt.setString(7, userId);
+			stmt.setString(7, userId);
 			
 			stmt.executeUpdate();
 			

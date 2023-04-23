@@ -1,6 +1,7 @@
 package io.freshfoods.filters;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,79 +12,29 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet Filter implementation class CORSFilter
- */
-@WebFilter(
-  filterName = "CORSFilter",
-  urlPatterns = { "/*" },
-  asyncSupported = true
-)
+@WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class CORSFilter implements Filter {
 
-  /**
-   * Default constructor.
-   */
-  public CORSFilter() {
-    // TODO Auto-generated constructor stub
-  }
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        System.out.println("SimpleCORSFilter HTTP Request: " + request.getMethod());
+        String clientOrigin = request.getHeader("origin");
 
-  /**
-   * @see Filter#destroy()
-   */
-  public void destroy() {
-    // TODO Auto-generated method stub
-  }
+        response.setHeader("Access-Control-Allow-Origin", clientOrigin);
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  /**
-   * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-   */
-  public void doFilter(
-    ServletRequest request,
-    ServletResponse response,
-    FilterChain chain
-  )
-    throws IOException, ServletException {
-    // TODO Auto-generated method stub
-    // place your code here
-
-    HttpServletRequest req = (HttpServletRequest) request;
-    System.out.println("CORSFilter HTTP Request: " + req.getMethod());
-    //        System.out.println("CORSFilter HTTP Origin: " + req.getHeader("origin"));
-    // System.out.println("CORSFilter HTTP Auth: " + req.getHeader("Authorization"));
-    String clientOrigin = req.getHeader("origin");
-
-    // Authorize (allow) all domains to consume the content
-    ((HttpServletResponse) response).addHeader(
-        "Access-Control-Allow-Origin",
-        // clientOrigin
-        "*"
-      );
-    ((HttpServletResponse) response).addHeader(
-        "Access-Control-Allow-Methods",
-        "GET, OPTIONS, HEAD, PUT, POST"
-      );
-    ((HttpServletResponse) response).addHeader(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization"
-      );
-
-    HttpServletResponse resp = (HttpServletResponse) response;
-
-    // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
-    if (req.getMethod().equals("OPTIONS")) {
-      resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-      return;
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        } else {
+            chain.doFilter(req, res);
+        }
     }
 
-    // pass the request along the filter chain
-    chain.doFilter(req, response);
-  }
+    public void init(FilterConfig filterConfig) {}
 
-  /**
-   * @see Filter#init(FilterConfig)
-   */
-  public void init(FilterConfig fConfig) throws ServletException {
-    // TODO Auto-generated method stub
-  }
+    public void destroy() {}
 }

@@ -25,7 +25,7 @@ Email: arimus@testemail.com
 Password: 1234  
 ```
 
-Test Payment Cart:
+~~Test Payment Cart:~~
 ```
 Card number: 5531 8866 5214 2950
 cvv: 564
@@ -33,6 +33,7 @@ Expiry: 09/32
 Pin: 3310
 OTP: 12345
 ```
+**Note: The app currently successfully places an order and does not interface with Rave. So, it no longer needs this.**
 
 
 
@@ -87,44 +88,26 @@ The Frontend, the Backend, and the Database are hosted in separate AWS EC2 insta
 </Context>
 ```
     
-* ### Setup Rave Account
+* ### ~~Setup Rave Account~~
 
   Go to **[Rave by Flutterwave](https://ravepay.co/)** website and set up your free account. Once logged in,
 
   * On the Left side panel under Billing Tools, make sure that the mode is switched to Test Mode.
   * Then go to Settings > API to get your Test API Public key.
 
-* ### Setup Environment variables for the frontend
-  Create an ***env.ts*** file in *PROJECT_ROOT/src/environments* folder with the following format:
+**Note: The app no longer interfaces with Rave and this step can be skipped.**
 
-  ```typescript
-  export const env = {
-    BACKEND_URL: 'YOUR_BACKEND_URL',
-    RAVE_API_KEY: 'YOUR_RAVE_API_KEY',
-  }
 
-  ```
+* ### Setup Environment variables
+  Update the `.env` file with your choosen values.
+
   
 ## Run the Project
 
-* Database
-    If you haven't set up the MySQL database to run as a service, run:
-```bash
-$ mysqld
-```
-
-* Deploy Jave Servlets on Tomcat  
-    
-    Package the backend in a war file and deploy it deploy on Tomcat server.  
-   
-   The easiest way to achieve this is to: Open the ***PROJECT_ROOT/backend*** folder in Ecplise and right click on the project name and select Export > WAR File.
-   Copy the war file in the ***%CATALINA_HOME/webapps***
-
-* Serve the Website  
-
-    * Install the required Packages and serve the website:
+The project is configured to run in docker containers. So, just run:
 
 ```bash
-> npm install
-> npm run start
+docker compose up -d
 ```
+
+It will build the and start three separate docker containers, one for frontend, one for the Java backend, and one for the MySQL database.

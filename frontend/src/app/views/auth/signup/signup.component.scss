@@ -1,0 +1,61 @@
+@import "../../shared/styles/variables";
+
+.signup {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__navbar {
+    height: 10vh;
+    background-color: #f0f4f8;
+  }
+
+  &__main {
+    height: 90vh;
+    display: grid;
+    place-items: center;
+  }
+
+  &__header {
+    color: $color-primary;
+  }
+
+  &__container {
+    margin-top: 8rem;
+    min-height: 50rem;
+
+    & > * {
+      padding: 0 4rem;
+    }
+  }
+
+  &__forgot-button {
+    color: $color-text-light;
+    font-size: 1.3rem;
+  }
+
+  &__submit-button {
+    background-color: $color-primary;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  &__create-button {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: $color-text-light;
+  }
+
+  &__details {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+
+    padding: 1rem 0;
+
+    &-text{
+      margin: 0;
+    }
+  }
+}
